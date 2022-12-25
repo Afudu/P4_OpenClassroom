@@ -69,7 +69,3 @@ class MainMenuView:
     def display_filled_line():
         print(f'{"":+>50}')
 
-# headers = ['Id', 'First Name', 'Last Name', 'Gender', 'Date of Birth', 'Rating']
-# nl = headers[1:]
-# print(nl.pop(2))
-# print(nl)

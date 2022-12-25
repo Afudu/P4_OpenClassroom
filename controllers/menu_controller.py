@@ -62,26 +62,3 @@ class MakeMenu:
                 if entry == line[0]:
                     return str(line[0])
             print('Please enter a valid menu item number \n')
-
-    # def show_subtitle(self, subtitle_to_show):
-    #     """Display the title and subtitle of the application"""
-    #     self.subtitle_to_show = subtitle_to_show
-    #
-    #     print(f'{"":+>30}')
-    #     print(f'{self.menu_title:+^30}')
-    #     print(f'{"":+>30}')
-    #     # print('')
-    #     print(f'{self.subtitle_to_show:+^30}')
-    #     print(f'{"":+>30}')
-
-# ml = Menu()
-# s = ml.menu_subtitles[1]
-# ml.show_subtitle(s)
-# # mm = ml.main_menu
-# # # print(ml(mm))
-# # ml(mm)
-# menu = {('1', 'Player Menu'), ('2', 'Tournament Menu'), ('3', 'Quit')}
-# # menu = {'1': 'Player Menu', '2': 'Tournament Menu', '3': 'Quit'}
-# headers = ['Option', 'Menu to display']
-# print(tabulate(menu, headers, tablefmt="simple_grid"))
-# # print(tabulate(menu, tablefmt="simple_grid"))

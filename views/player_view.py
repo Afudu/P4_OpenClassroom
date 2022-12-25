@@ -1,6 +1,4 @@
 from views import main_view
-
-
 # from controllers import player_controller
 
 
@@ -65,45 +63,12 @@ class DisplayPlayer(main_view.MainMenuView):
         self.lines = []
         # self.player_doc_id = None
 
-    # def display_all_players(self):
-    #     for player in self.players_table:
-    #         self.line = player['player_id'], player['first_name'], player['last_name'], player['rating']
-    #         self.lines.append(self.line)
-    #     self.table_view(self.lines, self.player_headers_by_id)
-    #
-    # def display_single_player(self, player_doc_id):
-    #     self.lines.clear()
-    #     player = self.players_table.get(doc_id=int(player_doc_id))
-    #     self.line = player['player_id'], player['first_name'], player['last_name'], player['rating']
-    #     self.lines.append(self.line)
-    #     self.table_view(self.lines, self.player_headers_by_id)
-
-    # def display_table(self, player_list, view_table):
-    #     for player in player_list:
-    #         match view_table:
-    #             case 'add_player_view':
-    #                self.line = player.first_name, player.last_name, player.gender, player.date_of_birth, player.rating
-    #             case 'update_rating_view':
-    #                self.line = player.first_name, player.last_name, player.gender, player.date_of_birth, player.rating
-    #             case 'add_tournament_view':
-    #                 self.line = player.player_id, player.first_name, player.last_name, player.date_of_birth
-    #         self.lines.append(self.line)
-    #     self.table_view(self.lines, self.player_headers_by_name)
-    #     self.lines.clear()
-
     def full_table(self, player_list):
         for player in player_list:
             self.line = player.first_name, player.last_name, player.gender, player.date_of_birth, player.rating
             self.lines.append(self.line)
         self.table_view(self.lines, self.player_headers_by_name)
         self.lines.clear()
-
-    # def table_by_dob(self, player_list):
-    #     for player in player_list:
-    #         self.line = player.player_id, player.first_name, player.last_name, player.date_of_birth
-    #         self.lines.append(self.line)
-    #     self.table_view(self.lines, self.player_headers_by_id)
-    #     self.lines.clear()
 
     def reduced_table(self, player_list):
         for player in player_list:

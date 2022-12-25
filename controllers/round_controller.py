@@ -6,11 +6,6 @@ from views import tournament_view
 from models import match_model
 
 
-# from views import player_view
-# import time
-# from operator import attrgetter
-
-
 class AddRound:
     """When a round is completed, the tournament manager inputs each match’s results
     before generating the next pairings.The winner receives 1 point, the loser 0 points.

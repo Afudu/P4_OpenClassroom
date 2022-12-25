@@ -97,26 +97,3 @@ class QuitAppController:
 
     def __call__(self):
         sys.exit()
-
-# class ClearScreen:
-#     """Clear the terminal"""
-#
-#     def __call__(self):
-#         # for windows
-#         if os.name == 'nt':
-#             _ = os.system('cls')
-#         # for mac and linux
-#         else:
-#             _ = os.system('clear')
-
-# help(PlayerMenuController)
-
-# text1 = "Tournament Manager"
-# text2 = "Main Menu"
-# # print(f'{text:#>20}')
-#
-# print(f'{"":+<50}')
-# print(f'{text1:+^50}')
-# print(f'{"":+>50}')
-# print(f'{text2:+^50}')
-# print(f'{"":+>50}')

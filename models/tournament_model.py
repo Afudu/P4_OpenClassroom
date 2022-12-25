@@ -1,12 +1,9 @@
-# from dataclasses import dataclass
-# import time
 from dbase.database import Database
 
 db = Database()
 tournaments_table = db.tournaments_table
 
 
-# @dataclass
 class Tournament:
     """Use to create an instance of a tournament"""
 
@@ -79,54 +76,3 @@ class Tournament:
                                 )
         tournament_id = tournaments_table.insert(tournament.serialized())
         tournaments_table.update({"tournament_id": tournament_id}, doc_ids=[tournament_id])
-
-# db.insert({'type': 'apples', 'count': 8})
-# tournaments_table.insert({'type': 'apples', 'count': 8})
-# db.insert({'name': 'John', 'age': 22})
-# print(db.all())
-# print(db.search(Fruit.name == 'John'))
-# print(db.get(Fruit.name == 'John').doc_id)
-# print(db.get(doc_id=1))
-# db.insert({'name': 'Johnny', 'age': 122})
-# db.get(Tournament.type == 'apples')
-# print(tournaments_table.get(doc_id=1))
-# print(tournaments_table.search(Fruit.type == 'apples'))
-# db.update({'value': 2}, doc_ids=[1, 2])
-# tournaments_table.update({'value': 2}, doc_ids=[1])
-# print(tournaments_table.insert({'name': 'Test', 'age': 32}))
-# print(players_table.insert({'name': 'Test', 'age': 32}))
-# t = Tournament()
-# print(t)
-# players_table.update({"name": 'Ali'}, Player.name == "Test")
-# players_table.update({"name": 'Ali1'}, doc_ids=[1])
-# p = players_table.get(Player.name == "Ali1")
-# print(p.doc_id)
-# print(players_table.get(doc_id=1))
-
-
-# t = Tournament()
-# values = ['Name', 'Venue', '13/08/2022', 4, 'Bullet', 'Description', []]
-# tour = Tournament(values[0],
-#                   values[1],
-#                   values[2],
-#                   values[3],
-#                   values[4],
-#                   values[5],
-#                   values[6]
-#                   )
-# t.add_to_database(values)
-# print(values[7])
-# ts = tour.serialized()
-# un = tour.unserialized(ts)
-# print(ts)
-# print(un)
-# tournaments_table.remove(doc_ids=[1, 2])
-# ts = tournaments_table.get(doc_id=1)
-# print(ts)
-# us = tour.unserialized(ts)
-# print(us)
-# chosen_tournament = tournaments_table.get(doc_id=1)
-# tournament_object = t.unserialized(chosen_tournament)
-# print(chosen_tournament)
-# tdef = db.table('_default')
-# tdef.remove(doc_ids=[1,2,3,4])

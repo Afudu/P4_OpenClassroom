@@ -156,7 +156,6 @@ class DisplayPlayerReport(MainPlayerController):
         self.clear()
         self.player_report_view()
         players_unserialized = [self.player_model.unserialized(player) for player in self.players_table]
-        # self.display_player.full_table(players_unserialized)
 
         while True:
             entry = self.make_menu(self.make_menu.players_report_menu)
@@ -175,38 +174,3 @@ class DisplayPlayerReport(MainPlayerController):
                     self.display_player.full_table(players_unserialized)
                 case "3":
                     self.main_menu_controller.go_to_player_menu_controller()
-
-# print(f'list is: {add_player.player_values}')
-# if any(map(str.isdigit, 'nnnn')):
-#     print('number included')
-# def validate(date_text):
-#     try:
-#         datetime.strptime(date_text, '%d-%m-%Y')
-#         return True
-#     except ValueError:
-#         raise ValueError("Incorrect data format, should be DD-MM-YYYY")
-
-
-# datetime.strptime(date_string, format)
-# date.strftime(format)
-
-# validate('13-12-2000')
-# print(str.casefold('N'))
-
-# today = datetime.date.today()
-# now = datetime.now().strftime('%d-%m-%Y')
-# strf = datetime.today().strftime('%d-%m-%Y')
-# strp = datetime.strptime(strf, '%d-%m-%Y')
-# print(datetime.datetime.strptime(str(td), '%d-%m-%Y'))
-# print(dir(datetime))
-# print(help(datetime))
-# print(now)
-# db = MainPlayerController()
-# tb = db.players_table
-# print(db.all())
-# help(db)
-# player_keys = ["Last Name", "First Name", "Date of birth", "Gender", "Ranking"]
-# player_values = ['Doe', 'John', '13/08/1970', 'M', '200']
-# print(f'{"Summary of Player Details":+^60}')
-# print(tabulate([player_keys, player_values], tablefmt="simple_grid"))
-# print(tb)
