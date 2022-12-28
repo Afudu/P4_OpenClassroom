@@ -47,10 +47,10 @@ class PlayerMenuController(MainMenuController):
 
     def __init__(self):
         super().__init__()
-        self.add_player_controller = player_controller.AddPlayer()
-        self.update_player_rating_controller = player_controller.UpdatePlayerRating()
-        self.players_report_controller = player_controller.DisplayPlayerReport()
-        self.main_menu_controller = MainMenuController()
+        self.add_player = player_controller.AddPlayer()
+        self.update_player_rating = player_controller.UpdatePlayerRating()
+        self.players_report = player_controller.PlayerReport()
+        self.main_menu = MainMenuController()
 
     def __call__(self):
         self.clear()
@@ -58,23 +58,23 @@ class PlayerMenuController(MainMenuController):
         entry = self.make_menu(self.make_menu.player_menu)
         match entry:
             case "1":
-                self.chosen_controller = self.add_player_controller()
+                self.add_player()
             case "2":
-                self.chosen_controller = self.update_player_rating_controller()
+                self.update_player_rating()
             case "3":
-                self.chosen_controller = self.players_report_controller()
+                self.players_report()
             case "4":
-                self.chosen_controller = self.main_menu_controller()
+                self.main_menu()
 
 
 class TournamentMenuController(MainMenuController):
 
     def __init__(self):
         super().__init__()
-        self.add_tournament_controller = tournament_controller.AddTournamentController()
-        self.start_tournament_controller = tournament_controller.StartTournamentController()
-        self.tournament_report_controller = tournament_controller.TournamentReport()
-        self.main_menu_controller = MainMenuController()
+        self.add_tournament = tournament_controller.CreateTournament()
+        self.start_tournament = tournament_controller.StartTournament()
+        self.tournament_report = tournament_controller.TournamentReport()
+        self.main_menu = MainMenuController()
 
     def __call__(self):
         self.clear()
@@ -82,15 +82,15 @@ class TournamentMenuController(MainMenuController):
         entry = self.make_menu(self.make_menu.tournament_menu)
         match entry:
             case "1":
-                self.chosen_controller = self.add_tournament_controller()
+                self.add_tournament()
             case "2":
-                self.chosen_controller = self.start_tournament_controller()
+                self.start_tournament()
             case "3":
-                self.chosen_controller = self.start_tournament_controller.load_tournament_statement()
+                self.start_tournament.load_tournament_statement()
             case "4":
-                self.chosen_controller = self.tournament_report_controller()
+                self.tournament_report()
             case "5":
-                self.main_menu_controller()
+                self.main_menu()
 
 
 class QuitAppController:

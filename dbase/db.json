@@ -71,6 +71,24 @@
             "rating": "200",
             "tournament_score": 0.0,
             "player_id": 8
+        },
+        "9": {
+            "first_name": "Xavier",
+            "last_name": "Lamourec",
+            "date_of_birth": "23/12/1993",
+            "gender": "M",
+            "rating": "200",
+            "tournament_score": 0,
+            "player_id": 9
+        },
+        "10": {
+            "first_name": "Aurore",
+            "last_name": "Gregoire",
+            "date_of_birth": "23/05/1982",
+            "gender": "W",
+            "rating": "200",
+            "tournament_score": 0,
+            "player_id": 10
         }
     },
     "tournaments_table": {
@@ -106,7 +124,16 @@
             "number_of_rounds": 4,
             "time_control": "Rapid",
             "description": "description",
-            "player_ids": [],
+            "player_ids": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+            ],
             "round_ids": [],
             "tournament_id": 2
         }

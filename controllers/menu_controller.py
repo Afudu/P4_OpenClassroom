@@ -17,7 +17,7 @@ class MakeMenu:
                             ('4', 'Back to Main Menu')
                             ]
 
-        self.tournament_menu = [('1', 'Add Tournament'),
+        self.tournament_menu = [('1', 'Create Tournament'),
                                 ('2', 'Start Tournament'),
                                 ('3', 'Resume Tournament'),
                                 ('4', 'Tournament Report'),

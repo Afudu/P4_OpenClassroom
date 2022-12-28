@@ -1,10 +1,10 @@
 from views import main_view
 import time
-from models import player_model
+from controllers import player_controller
 
 
 class TournamentMenuView(main_view.MainMenuView):
-    """Display all the players in the database"""
+    """Creates the Tournament main menu view"""
 
     def __init__(self):
         super().__init__()
@@ -28,22 +28,26 @@ class DisplayTournament(main_view.MainMenuView):
 
     def default(self, tournament_list):
         for tournament in tournament_list:
-            self.line = tournament.tournament_id, tournament.name, tournament.venue
+            self.line = tournament.tournament_id, \
+                        tournament.name, \
+                        tournament.venue
             self.lines.append(self.line)
         self.table_view(self.lines, self.tournament_headers_by_id)
         self.lines.clear()
 
     def in_progress(self, tournament_list):
         for tournament in tournament_list:
-            rounds_played = tournament.round_ids
-            self.line = tournament.tournament_id, tournament.name, tournament.venue, rounds_played
+            self.line = tournament.tournament_id, \
+                        tournament.name, \
+                        tournament.venue, \
+                        tournament.round_ids
             self.lines.append(self.line)
         self.table_view(self.lines, self.tournaments_in_progress_headers)
         self.lines.clear()
 
 
 class AddTournamentView(main_view.MainMenuView):
-    """View handling Adding a Tournament"""
+    """Creates the Add Tournament menu headers"""
 
     def __init__(self):
         super().__init__()
@@ -65,7 +69,7 @@ class AddTournamentView(main_view.MainMenuView):
 
 
 class StartTournamentView(main_view.MainMenuView):
-    """View handling starting a tournament"""
+    """Creates the Start Tournament menu headers"""
 
     def __init__(self):
         super().__init__()
@@ -81,9 +85,6 @@ class StartTournamentView(main_view.MainMenuView):
 class ResumeTournamentView(main_view.MainMenuView):
     """View handling resuming a tournament in progress"""
 
-    def __init__(self):
-        super().__init__()
-
     def __call__(self):
         self.display_filled_line()
         self.display_text_surrounded(self.menu_options[5])
@@ -93,7 +94,7 @@ class ResumeTournamentView(main_view.MainMenuView):
 
 
 class RoundView(main_view.MainMenuView):
-    """View handling starting a tournament"""
+    """Displays the Tournament rounds and matches"""
 
     def __init__(self):
         super().__init__()
@@ -108,7 +109,8 @@ class RoundView(main_view.MainMenuView):
         self.display_text_surrounded(round_name)
 
         for match in match_instances:
-            self.line = match.match_name, str(match.player_1) + " Vs " + str(match.player_2)
+            self.line = match.match_name, \
+                        str(match.player_1) + " Vs " + str(match.player_2)
             self.lines.append(self.line)
         self.table_view(self.lines, [])
         self.lines.clear()
@@ -139,25 +141,19 @@ class RoundView(main_view.MainMenuView):
 
 
 class TournamentResultsView(main_view.MainMenuView):
-    """Display the final score at the end of the tournament"""
-
+    """Displays the final score at the end of the tournament"""
     def __call__(self, round_objects=None):
-        self.table_view = main_view.TableView()
-        self.line = None
-        self.lines = []
+
+        self.players_table = player_controller.player_model.players_table
 
         for round_object in round_objects:
             print(round_object)
             print()
             for match in round_object.list_of_played_matches:
-                player_1 = player_model.players_table.get(doc_id=match[0][0])
+                player_1 = self.players_table.get(doc_id=match[0][0])
                 score_player_1 = match[0][1]
-                player_2 = player_model.players_table.get(doc_id=match[1][0])
+                player_2 = self.players_table.get(doc_id=match[1][0])
                 score_player_2 = match[1][1]
-                # unserialized_player_1 = player_model.Player().unserialized(player_1)
-                # unserialized_player_2 = player_model.Player().unserialized(player_2)
-                # self.line = unserialized_player_1 + "Vs" + unserialized_player_2, \
-                # score_player_1 + "-" + score_player_2
 
                 print(f"{player_1['first_name']} {player_1['last_name']} Vs "
                       f"{player_2['first_name']} {player_2['last_name']}\n"
@@ -180,10 +176,7 @@ class TournamentResultsView(main_view.MainMenuView):
 
 
 class TournamentReportView(main_view.MainMenuView):
-    """Display all the players in the database"""
-
-    def __init__(self):
-        super().__init__()
+    """Display all the Tournament report headers """
 
     def __call__(self):
         self.display_filled_line()

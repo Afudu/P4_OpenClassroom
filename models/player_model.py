@@ -26,9 +26,13 @@ class Player:
         self.serialized_player = None
 
     def serialized(self):
-        player_data = {'first_name': self.first_name, 'last_name': self.last_name,
-                       'date_of_birth': self.date_of_birth, 'gender': self.gender,
-                       'rating': self.rating, 'tournament_score': self.tournament_score, 'player_id': self.player_id}
+        player_data = {'first_name': self.first_name,
+                       'last_name': self.last_name,
+                       'date_of_birth': self.date_of_birth,
+                       'gender': self.gender,
+                       'rating': self.rating,
+                       'tournament_score': self.tournament_score,
+                       'player_id': self.player_id}
         return player_data
 
     def unserialized(self, serialized_player):
@@ -66,4 +70,4 @@ class Player:
                         )
         player_id = players_table.insert(player.serialized())
         players_table.update({'player_id': player_id}, doc_ids=[player_id])
-        time.sleep(2)
+        time.sleep(1)

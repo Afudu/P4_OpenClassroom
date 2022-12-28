@@ -1,13 +1,8 @@
 from views import main_view
-# from controllers import player_controller
 
 
 class PlayerMenuView(main_view.MainMenuView):
-    """Display all the players in the database"""
-
-    def __init__(self):
-        super().__init__()
-
+    """Creates the player main menu header"""
     def __call__(self):
         self.display_filled_line()
         self.display_text_surrounded(self.app_name)
@@ -17,11 +12,7 @@ class PlayerMenuView(main_view.MainMenuView):
 
 
 class AddPlayerView(main_view.MainMenuView):
-    """Display all the players in the database"""
-
-    def __init__(self):
-        super().__init__()
-
+    """Creates the Add Player menu header"""
     def __call__(self):
         self.display_filled_line()
         self.display_text_surrounded(self.app_name)
@@ -35,10 +26,7 @@ class AddPlayerView(main_view.MainMenuView):
 
 
 class UpdateRatingView(main_view.MainMenuView):
-    """Display all the players in the database"""
-
-    def __init__(self):
-        super().__init__()
+    """Creates the Update Player Rating menu header"""
 
     def __call__(self):
         self.display_filled_line()
@@ -53,59 +41,53 @@ class UpdateRatingView(main_view.MainMenuView):
 
 
 class DisplayPlayer(main_view.MainMenuView):
-    """Display all the players in the database"""
+    """Displays the players in the database"""
 
     def __init__(self):
         super().__init__()
         self.table_view = main_view.TableView()
-        # self.players_table = player_controller.MainPlayerController().players_table
         self.line = None
         self.lines = []
-        # self.player_doc_id = None
 
     def full_table(self, player_list):
         for player in player_list:
-            self.line = player.first_name, player.last_name, player.gender, player.date_of_birth, player.rating
+            self.line = player.first_name, \
+                        player.last_name, \
+                        player.gender, \
+                        player.date_of_birth, \
+                        player.rating
             self.lines.append(self.line)
         self.table_view(self.lines, self.player_headers_by_name)
         self.lines.clear()
 
     def reduced_table(self, player_list):
         for player in player_list:
-            self.line = player.player_id, player.first_name, player.last_name, player.rating
+            self.line = player.player_id, \
+                        player.first_name, \
+                        player.last_name, \
+                        player.rating
             self.lines.append(self.line)
         self.table_view(self.lines, self.player_headers_by_id)
         self.lines.clear()
 
     def add_player_to_tournament_table(self, player_list):
         for player in player_list:
-            self.line = player.player_id, player.first_name, player.last_name, player.date_of_birth
+            self.line = player.player_id, \
+                        player.first_name, \
+                        player.last_name, \
+                        player.date_of_birth
             self.lines.append(self.line)
         self.table_view(self.lines, self.player_headers_by_dob)
         self.lines.clear()
 
 
 class PlayerReportView(main_view.MainMenuView):
-    """Display all the players in the database"""
-
-    def __init__(self):
-        super().__init__()
-        # self.table_view = main_view.TableView()
-        # self.line = None
-        # self.lines = []
-
+    """Creates the Update Player Report menu header"""
     def __call__(self):
         self.display_filled_line()
         self.display_text_surrounded(self.menu_options[2])
         self.display_filled_line()
         self.display_empty_line()
-
-    # def display_player_report(self, sorted_list):
-    #     for player in sorted_list:
-    #         self.line = player.first_name, player.last_name, player.gender, player.date_of_birth, player.rating
-    #         self.lines.append(self.line)
-    #     self.table_view(self.lines, self.player_headers_by_name)
-    #     self.lines.clear()
 
     def display_title_alphabetically(self):
         self.display_text_surrounded(self.player_references[3])
