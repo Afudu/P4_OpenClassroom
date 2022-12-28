@@ -35,8 +35,7 @@ class AddRound:
             valid_score_player_1 = False
             while not valid_score_player_1:
                 try:
-                    score_player_1 = float(input(f"Enter the score"
-                                                 f" of {match.player_1}:"))
+                    score_player_1 = float(input(f"Enter the score of {match.player_1}:"))
                     if not (score_player_1 == 0 or score_player_1 == 0.5
                             or score_player_1 == 1):
                         raise ValueError
@@ -68,11 +67,8 @@ class AddRound:
                     print(f"Running score of {match.player_2} = "
                           f"{match.player_2.tournament_score}")
 
-            self.list_of_played_matches.append(([match.player_1.player_id,
-                                                 match.score_player_1],
-                                                [match.player_2.player_id,
-                                                 match.score_player_2]
-                                                ))
+            self.list_of_played_matches.append(([match.player_1.player_id, match.score_player_1],
+                                                [match.player_2.player_id, match.score_player_2]))
 
         return round_model.Round(self.round_name,
                                  self.start_time,
