@@ -75,8 +75,7 @@ class MainMenuView:
                                            'Start Date',
                                            'Number of Rounds',
                                            'Time Control',
-                                           'Description',
-                                           'Players'
+                                           'Description'
                                            ]
         self.tournament_headers_by_id = ['Id',
                                          'Tournament Name',

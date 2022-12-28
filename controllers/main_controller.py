@@ -71,7 +71,7 @@ class TournamentMenuController(MainMenuController):
 
     def __init__(self):
         super().__init__()
-        self.add_tournament = tournament_controller.CreateTournament()
+        self.create_tournament = tournament_controller.CreateTournament()
         self.start_tournament = tournament_controller.StartTournament()
         self.tournament_report = tournament_controller.TournamentReport()
         self.main_menu = MainMenuController()
@@ -82,7 +82,7 @@ class TournamentMenuController(MainMenuController):
         entry = self.make_menu(self.make_menu.tournament_menu)
         match entry:
             case "1":
-                self.add_tournament()
+                self.create_tournament()
             case "2":
                 self.start_tournament()
             case "3":
