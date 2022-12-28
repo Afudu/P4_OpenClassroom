@@ -1,7 +1,9 @@
 from datetime import datetime
 from controllers import main_controller
+from controllers import player_controller
 from models import tournament_model
 from models import round_model
+from views import main_view
 from views import tournament_view
 from views import player_view
 import time
@@ -14,7 +16,7 @@ class MainTournamentController:
         self.tournaments_table = self.database.tournaments_table
         self.players_table = self.database.players_table
         self.rounds_table = self.database.rounds_table
-        self.player_model = main_controller.player_controller.player_model.Player()
+        self.player_model = player_controller.player_model.Player()
         self.tournament_model = tournament_model.Tournament()
         self.round_model = round_model.Round()
         self.clear = tournament_view.main_view.ClearScreen()
@@ -23,7 +25,7 @@ class MainTournamentController:
 
 
 class CreateTournament(MainTournamentController):
-    """Enter all the tournament's details, then add them into the tournament database"""
+    """Prompt for the details then add them into the tournament database"""
 
     def __init__(self):
         super().__init__()
@@ -33,7 +35,7 @@ class CreateTournament(MainTournamentController):
         self.add_tournament_view = tournament_view.AddTournamentView()
         self.make_menu = main_controller.menu_controller.MakeMenu()
         self.display_player = player_view.DisplayPlayer()
-        self.tournament_headers = tournament_view.main_view.MainMenuView().tournament_headers_by_name
+        self.headers = main_view.MainMenuView().tournament_headers_by_name
 
     def __call__(self):
         self.tournament_values.append(self.prompt_for_name())
@@ -43,11 +45,14 @@ class CreateTournament(MainTournamentController):
         self.tournament_values.append(self.prompt_for_time_control())
         self.tournament_values.append(self.prompt_for_description())
         if self.validate_tournament() == 'save_tournament':
-            tournament_id = self.tournament_model.add_to_database(self.tournament_values)
+            tournament_id = self.tournament_model.add_to_database(
+                self.tournament_values)
             print('Saving the tournament data...')
             time.sleep(2)
-            tournament_object = self.tournaments_table.get(doc_id=int(tournament_id))
-            unserialized = self.tournament_model.unserialized(tournament_object)
+            tournament_object = self.tournaments_table.get(
+                doc_id=int(tournament_id))
+            unserialized = self.tournament_model.unserialized(
+                tournament_object)
             self.prompt_for_players(unserialized)
 
         self.tournament_values.clear()
@@ -74,27 +79,32 @@ class CreateTournament(MainTournamentController):
     @staticmethod
     def prompt_for_start_date():
         while True:
-            start_date = input("Enter the tournament start date in the form of DD/MM/YYYY: ")
+            start_date = input("Enter the tournament start date "
+                               "in the form of DD/MM/YYYY: ")
             try:
                 datetime.strptime(start_date, '%d/%m/%Y')
                 return start_date
             except ValueError:
-                print("Please enter a valid date in the form of DD/MM/YYYY")
+                print("Please enter a valid date "
+                      "in the form of DD/MM/YYYY")
 
     @staticmethod
     def prompt_for_number_of_rounds():
         number_of_rounds = 4
 
         while True:
-            entry = input("The default number of rounds is " + str(number_of_rounds) +
+            entry = input("The default number of rounds is "
+                          + str(number_of_rounds) +
                           "\nWould you like to change it? (Y or N): ").lower()
             match entry:
                 case 'y':
                     while True:
-                        new_number_of_rounds = input("Enter the new number of rounds: ")
-                        if not (new_number_of_rounds.isdigit() and int(new_number_of_rounds) > 0
+                        new_number_of_rounds = input("Enter the new number "
+                                                     "of rounds: ")
+                        if not (new_number_of_rounds.isdigit()
+                                and int(new_number_of_rounds) > 0
                                 and (int(new_number_of_rounds) % 2 == 0)):
-                            print("Please enter a positive even number")
+                            print("Please enter a positive even number.")
                             continue
                         return new_number_of_rounds
                 case 'n':
@@ -125,16 +135,19 @@ class CreateTournament(MainTournamentController):
     def prompt_for_players(self, tournament_object):
         # self.player_ids = []
         self.player_ids = tournament_object.player_ids
-        self.players_unserialized = main_controller.player_controller.PlayersUnserialized()
+        self.players_unserialized = player_controller.PlayersUnserialized()
         players_unserialized = self.players_unserialized()
         self.add_tournament_view.add_player_view()
-        self.display_player.add_player_to_tournament_table(players_unserialized)
+        self.display_player.add_player_to_tournament_table(
+            players_unserialized)
 
-        choice = input("Would you like to add the player(s) now? (Y or N): ").lower()
+        choice = input("Would you like to add the player(s) now? "
+                       "(Y or N): ").lower()
 
         while len(self.player_ids) < 8:
             if len(self.player_ids) > 0:
-                choice = input("\nWould you like to continue adding a player? (Y or N): ").lower()
+                choice = input("\nWould you like to continue adding a player? "
+                               "(Y or N): ").lower()
             match choice:
                 case 'y':
                     print('Players in the tournament: ' + str(self.player_ids))
@@ -146,26 +159,30 @@ class CreateTournament(MainTournamentController):
                         print("Please enter a valid player id.")
                         continue
                     if int(entry) in self.player_ids:
-                        print("This player has already been added. Please add another.")
+                        print("This player has already been added. "
+                              "Please add another.")
                         continue
 
-                    player_to_add = [player for player in players_unserialized if
-                                     player.player_id == int(entry)]
+                    player_to_add = [player
+                                     for player in players_unserialized
+                                     if player.player_id == int(entry)]
                     if not player_to_add:
-                        print("Your choice is not in the list. Please enter an id in the list.")
+                        print("Your choice is not in the list. "
+                              "Please enter an id in the list.")
                         continue
                     self.player_ids.append(int(entry))
-                    self.tournament_model.update_player_list(self.player_ids,
-                                                             tournament_object.tournament_id)
+                    self.tournament_model.update_players(self.player_ids,
+                                                         tournament_object.tournament_id)
                 case 'n':
-                    self.tournament_model.update_player_list(self.player_ids,
-                                                             tournament_object.tournament_id)
+                    self.tournament_model.update_players(self.player_ids,
+                                                         tournament_object.tournament_id)
                     self.main_menu_controller.go_to_tournament_menu_controller()
                 case _:
                     print("Please enter Y (for Yes) or N (for No)")
 
         while True:
-            entry = input("\nWould you like to start the rounds now ? (Y or N): ").lower()
+            entry = input("\nWould you like to start the rounds now ? "
+                          "(Y or N): ").lower()
             match entry:
                 case 'y':
                     StartTournament().generate_rounds(tournament_object)
@@ -176,9 +193,10 @@ class CreateTournament(MainTournamentController):
 
     def validate_tournament(self):
         self.add_tournament_view.validate_tournament_view()
-        self.table_view([self.tournament_headers, self.tournament_values], [])
+        self.table_view([self.headers, self.tournament_values], [])
         while True:
-            entry = input("\nWould you like to save this tournament ? (Y or N): ").lower()
+            entry = input("\nWould you like to save this tournament ? "
+                          "(Y or N): ").lower()
             match entry:
                 case 'y':
                     return 'save_tournament'
@@ -294,7 +312,8 @@ class StartTournament(MainTournamentController):
         round_model.match_model.Match.MATCH_NUMBER = len(self.MATCHES_PLAYED) + 1
 
         # all the others rounds
-        for i in range(int(self.tournament_object.number_of_rounds - len(self.tournament_object.round_ids))):
+        for i in range(int(self.tournament_object.number_of_rounds -
+                           len(self.tournament_object.round_ids))):
             self.sorted_players.clear()
             self.sorted_players = self.sort_players_other_rounds(self.tournament_object)
             self.tournament_object.round_ids.append(self.round_model.run(self.tournament_object,
@@ -319,12 +338,14 @@ class StartTournament(MainTournamentController):
 
         self.start_tournament_view()
 
-        not_started = [tournament for tournament in self.tournaments_table if tournament['round_ids'] == []]
+        not_started = [tournament
+                       for tournament in self.tournaments_table if tournament['round_ids'] == []]
         if not not_started:
             print('\nThere are no tournaments awaiting to be started. Please add a tournament.')
             time.sleep(2)
             self.main_menu_controller.go_to_tournament_menu_controller()
-        unserialized_not_started = [self.tournament_model.unserialized(tournament) for tournament in not_started]
+        unserialized_not_started = [self.tournament_model.unserialized(tournament)
+                                    for tournament in not_started]
         self.display_tournament.default(unserialized_not_started)
 
         while True:
@@ -336,8 +357,8 @@ class StartTournament(MainTournamentController):
             if not selected_tournament:
                 print("The id you entered is not in the list. Please enter a valid tournament id.")
                 continue
-            unserialized_selected_tournament = self.tournament_model.unserialized(selected_tournament)
-            return unserialized_selected_tournament
+            unserialized_selected = self.tournament_model.unserialized(selected_tournament)
+            return unserialized_selected
 
     def prompt_for_tournaments_in_progress(self):
         self.resume_tournament_view()
@@ -347,7 +368,8 @@ class StartTournament(MainTournamentController):
             print('\nThere are no tournaments in progress.')
             time.sleep(2)
             self.main_menu_controller.go_to_tournament_menu_controller()
-        unserialized_in_progress = [self.tournament_model.unserialized(tournament) for tournament in in_progress]
+        unserialized_in_progress = [self.tournament_model.unserialized(tournament)
+                                    for tournament in in_progress]
         self.display_tournament.in_progress(unserialized_in_progress)
 
         while True:
@@ -357,43 +379,16 @@ class StartTournament(MainTournamentController):
                 continue
             selected_tournament = self.tournaments_table.get(doc_id=int(entry))
             if not selected_tournament:
-                print("The id you entered is not in the list. Please enter a valid tournament id.")
+                print("The id you entered is not in the list. "
+                      "Please enter a valid tournament id.")
                 continue
-            unserialized_selected_tournament = self.tournament_model.unserialized(selected_tournament)
-            return unserialized_selected_tournament
-
-    # def prompt_for_tournaments(self, status):
-    #     self.tournament_status = status
-    #     tournaments = {}
-    #     if self.tournament_status == 'not_started':
-    #         tournaments = [tournament for tournament in self.tournaments_table
-    #                        if tournament['round_ids'] == []]
-    #     elif self.tournament_status == 'in_progress':
-    #         tournaments = [tournament for tournament in self.tournaments_table
-    #                        if 0 < len(tournament['round_ids']) < 4]
-    #
-    #     if not tournaments:
-    #         print('There are no tournaments awaiting to be started. Please add a tournament.')
-    #         time.sleep(2)
-    #         self.main_menu_controller.go_to_tournament_menu_controller()
-    #     unserialized_tournaments = [self.tournament_model.unserialized(tournament) for tournament in tournaments]
-    #     self.display_tournament.display_tournament_table(unserialized_tournaments)
-    #
-    #     while True:
-    #         entry = input("Enter the id of the tournament to start: ")
-    #         if not entry.isdigit():
-    #             print("Please enter a valid tournament id.")
-    #             continue
-    #         selected_tournament = self.tournaments_table.get(doc_id=int(entry))
-    #         if not selected_tournament:
-    #             print("The id you entered is not in the list. Please enter a valid tournament id.")
-    #             continue
-    #         unserialized_selected_tournament = self.tournament_model.unserialized(selected_tournament)
-    #         return unserialized_selected_tournament
+            unserialized_selected = self.tournament_model.unserialized(selected_tournament)
+            return unserialized_selected
 
     def prompt_to_postpone_tournament(self):
         while True:
-            entry = input("\nWould you like to postpone and resume the tournament later ? (Y or N): ").lower()
+            entry = input("\nWould you like to postpone and resume the tournament later ?"
+                          " (Y or N): ").lower()
             match entry:
                 case 'y':
                     self.main_menu_controller.go_to_tournament_menu_controller()
@@ -566,12 +561,10 @@ class TournamentReport(MainTournamentController):
             entry = self.make_menu(self.make_menu.tournament_players_report_menu)
             match entry:
                 case "1":
-                    self.clear()
                     self.player_report_view.display_title_alphabetically()
                     tournament_players.sort(key=attrgetter('first_name'))
                     self.display_player.full_table(tournament_players)
                 case "2":
-                    self.clear()
                     self.player_report_view.display_title_rating()
                     tournament_players.sort(key=attrgetter('rating'), reverse=True)
                     self.display_player.full_table(tournament_players)

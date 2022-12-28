@@ -79,15 +79,3 @@ class AddRound:
                                  self.end_time,
                                  self.list_of_played_matches
                                  )
-
-    # def prompt_to_start(self, tournament_object):
-    #     while True:
-    #         entry = input("\nWould you like to start the rounds now ? (Y or N): ").lower()
-    #         match entry:
-    #             case 'y':
-    #                 self.main_menu_controller.go_to_tournament_menu_controller()
-    #                 # StartTournament().generate_rounds(tournament_object)
-    #             case 'n':
-    #                 self.main_menu_controller.go_to_tournament_menu_controller()
-    #             case _:
-    #                 print("Please enter Y (for Yes) or N (for No)")

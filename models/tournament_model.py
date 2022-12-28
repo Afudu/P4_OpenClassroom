@@ -88,7 +88,7 @@ class Tournament:
         return tournament_id
 
     @staticmethod
-    def update_player_list(player_list, tournament_id):
+    def update_players(player_list, tournament_id):
 
         tournaments_table.update(
             {"player_ids": player_list},

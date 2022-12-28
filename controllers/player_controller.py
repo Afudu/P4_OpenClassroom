@@ -190,16 +190,16 @@ class PlayersUnserialized(MainPlayerController):
 
     def __init__(self):
         super().__init__()
-        # self.main_menu_controller = main_controller.MainMenuController()
 
     def __call__(self):
         players_unserialized = [self.player_model.unserialized(player)
                                 for player in self.players_table]
         if not players_unserialized:
-            print('There are no players in the database. Please add at least 8 players.')
+            print('There are no players in the database. '
+                  'Please add at least 8 players.')
             time.sleep(2.5)
             self.main_menu_controller.go_to_player_menu_controller()
         elif not len(players_unserialized) >= 8:
-            print(f'There are {len(players_unserialized)} player(s) in the database. '
-                  f'Please add at least 8 players.')
+            print(f'There are {len(players_unserialized)} '
+                  f'player(s) in the database. Please add at least 8 players.')
         return players_unserialized

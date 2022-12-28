@@ -41,12 +41,12 @@ class MakeMenu:
 
         self.tournament_players_report_menu = [('1', 'Players Alphabetically'),
                                                ('2', 'Players By Rating'),
-                                               ('3', 'Back to Tournament Report Menu')
+                                               ('3', 'Back to Report Menu')
                                                ]
 
         self.tournament_rounds_report_menu = [('1', 'All Rounds'),
                                               ('2', 'Matches by Round'),
-                                              ('3', 'Back to Tournament Report Menu')
+                                              ('3', 'Back to Report Menu')
                                               ]
 
     def __call__(self, menu_to_show):
