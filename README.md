@@ -13,17 +13,17 @@ for match pairings, and produce reports.
 
 It allows tournament managers to:
 
-    **-** Add and save players. 
+    - Add and save players. 
     
-    **-** Update player ratings.
+    - Update player ratings.
     
-    **-** Create and save tournaments.
+    - Create and save tournaments.
     
-    **-** Start, postpone and resume tournament rounds.
+    - Start, postpone and resume tournament rounds.
     
-    **-** Input match scores.
+    - Input match scores.
     
-    **-** Display player and tournament reports.
+    - Display player and tournament reports.
 
 The application follows the Model-View-Controller (MVC) design pattern and uses TinyDb, 
 a document oriented database, to store the data.
