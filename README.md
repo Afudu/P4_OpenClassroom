@@ -1,6 +1,6 @@
 # OpenClassroom - Python Developer Path
 
-**Project 2:** Develop a Software Program Using Python
+**Project 4:** Develop a Software Program Using Python
 
 **Student:** Abdoul Baki Seydou
 
@@ -49,7 +49,7 @@ The following commands rely on the knowledge of how to use the terminal (Unix, m
 
 **1 - Get the code**
 
-  * $ git clone https://github.com/Afudu/P2_OpenClassroom.git
+  * $ git clone https://github.com/Afudu/P4_OpenClassroom.git
 
 **2 - Move to the folder**
 
