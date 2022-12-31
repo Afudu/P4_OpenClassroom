@@ -47,8 +47,7 @@ class Round:
                      )
 
     def __repr__(self):
-        return f"{self.name} - Started: {self.start_time}. " \
-               f"Ended: {self.end_time}."
+        return f"{self.name} - Started: {self.start_time}. Ended: {self.end_time}."
 
     def run(self, tournament_object, sorted_players_list):
         self.match_instances = []
@@ -56,8 +55,7 @@ class Round:
         self.name = "Round " + str(len(tournament_object.round_ids) + 1)
 
         while len(sorted_players_list) > 0:
-            match_instance = match_model.Match(sorted_players_list[0],
-                                               sorted_players_list[1])
+            match_instance = match_model.Match(sorted_players_list[0], sorted_players_list[1])
             match_model.Match.MATCH_NUMBER += 1
             self.match_instances.append(match_instance)
             del sorted_players_list[0:2]
@@ -71,8 +69,7 @@ class Round:
             valid_score_player_1 = False
             while not valid_score_player_1:
                 try:
-                    score_player_1 = float(input(f"Enter the score of"
-                                                 f" {match.player_1}:"))
+                    score_player_1 = float(input(f"Enter the score of {match.player_1}:"))
                     if not (score_player_1 == 0 or score_player_1 == 0.5
                             or score_player_1 == 1):
                         raise ValueError
@@ -92,8 +89,7 @@ class Round:
             valid_score_player_2 = False
             while not valid_score_player_2:
                 try:
-                    score_player_2 = float(input(f"Enter the score of "
-                                                 f"{match.player_2} :"))
+                    score_player_2 = float(input(f"Enter the score of {match.player_2} :"))
                     if not (score_player_2 == 0 or score_player_2 == 0.5
                             or score_player_2 == 1):
                         raise ValueError

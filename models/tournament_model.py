@@ -81,10 +81,7 @@ class Tournament:
                                 tournament_values[5]
                                 )
         tournament_id = tournaments_table.insert(tournament.serialized())
-        tournaments_table.update(
-            {"tournament_id": tournament_id},
-            doc_ids=[tournament_id]
-                                )
+        tournaments_table.update({"tournament_id": tournament_id}, doc_ids=[tournament_id])
         return tournament_id
 
     @staticmethod

@@ -291,7 +291,7 @@ class StartTournament(MainTournamentController):
             self.main_menu_controller.go_to_tournament_menu_controller()
         unserialized_not_started = [self.tournament_model.unserialized(tournament)
                                     for tournament in not_started]
-        self.display_tournament.default(unserialized_not_started)
+        self.display_tournament.not_started(unserialized_not_started)
 
         while True:
             entry = input("Enter the Id of the tournament to start: ")
@@ -417,6 +417,8 @@ class StartTournament(MainTournamentController):
 
 class ResumeTournament(MainTournamentController):
     """Resumes a tournament postponed"""
+    # clear list
+
     MATCHES_PLAYED = []
     ROUNDS_PLAYED = []
 
@@ -474,7 +476,8 @@ class ResumeTournament(MainTournamentController):
         for i in range(int(self.tournament_object.number_of_rounds - len(self.tournament_object.round_ids))):
             self.sorted_players.clear()
             self.sorted_players = self.start_tournament.sort_players_other_rounds(self.tournament_object)
-            self.tournament_object.round_ids.append(self.round_model.run(self.tournament_object, self.sorted_players))
+            self.tournament_object.round_ids.append(self.round_model.run(self.tournament_object,
+                                                                         self.sorted_players))
             self.start_tournament.save_tournament_statement(self.tournament_object)
 
             # prompt to postpone if not last round
@@ -488,7 +491,6 @@ class ResumeTournament(MainTournamentController):
             round_unserialized = self.round_model.unserialized(round_serialized)
             round_instances.append(round_unserialized)
 
-        # end tournament - display matches and rounds
         self.end_tournament_view.end_tournament_header()
         self.end_tournament_view(round_instances)
         self.main_menu_controller.go_to_tournament_menu_controller()
@@ -545,7 +547,7 @@ class TournamentReport(MainTournamentController):
             print('\nThere are no tournaments created.')
             time.sleep(2)
             self.main_menu_controller.go_to_tournament_menu_controller()
-        self.display_tournament.default(unserialized_tournament)
+        self.display_tournament.not_started(unserialized_tournament)
 
         while True:
             entry = input("Enter the Id of the tournament to display the report: ")

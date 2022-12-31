@@ -26,21 +26,16 @@ class DisplayTournament(main_view.MainMenuView):
         self.line = None
         self.lines = []
 
-    def default(self, tournament_list):
+    def not_started(self, tournament_list):
         for tournament in tournament_list:
-            self.line = tournament.tournament_id, \
-                        tournament.name, \
-                        tournament.venue
+            self.line = tournament.tournament_id, tournament.name, tournament.venue
             self.lines.append(self.line)
         self.table_view(self.lines, self.tournament_headers_by_id)
         self.lines.clear()
 
     def in_progress(self, tournament_list):
         for tournament in tournament_list:
-            self.line = tournament.tournament_id, \
-                        tournament.name, \
-                        tournament.venue, \
-                        tournament.round_ids
+            self.line = tournament.tournament_id, tournament.name, tournament.venue, tournament.round_ids
             self.lines.append(self.line)
         self.table_view(self.lines, self.tournaments_in_progress_headers)
         self.lines.clear()
