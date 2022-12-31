@@ -398,14 +398,14 @@ class StartTournament(MainTournamentController):
                     print("Please enter Y (for Yes) or N (for No)")
 
     def check_players(self, tournament_object):
-        # self.tournament_object = tournament_object
+        self.tournament_object = tournament_object
         self.create_tournament = CreateTournament()
         players = tournament_object.player_ids
         if not players:
             print("\nThere are no players in this tournament."
                   "\nPlease add 8 players to start the tournament.")
             time.sleep(2.5)
-            self.create_tournament.prompt_for_players(tournament_object)
+            self.create_tournament.prompt_for_players(self.tournament_object)
         elif not len(players) == 8:
             print(f"{len(players)} player(s) in this tournament.\n"
                   f"Please add {int(8 - len(players))} "
