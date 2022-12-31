@@ -291,7 +291,7 @@ class StartTournament(MainTournamentController):
             self.main_menu_controller.go_to_tournament_menu_controller()
         unserialized_not_started = [self.tournament_model.unserialized(tournament)
                                     for tournament in not_started]
-        self.display_tournament.not_started(unserialized_not_started)
+        self.display_tournament.default(unserialized_not_started)
 
         while True:
             entry = input("Enter the Id of the tournament to start: ")
@@ -547,7 +547,7 @@ class TournamentReport(MainTournamentController):
             print('\nThere are no tournaments created.')
             time.sleep(2)
             self.main_menu_controller.go_to_tournament_menu_controller()
-        self.display_tournament.not_started(unserialized_tournament)
+        self.display_tournament.default(unserialized_tournament)
 
         while True:
             entry = input("Enter the Id of the tournament to display the report: ")

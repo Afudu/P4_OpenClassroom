@@ -26,7 +26,7 @@ class DisplayTournament(main_view.MainMenuView):
         self.line = None
         self.lines = []
 
-    def not_started(self, tournament_list):
+    def default(self, tournament_list):
         for tournament in tournament_list:
             self.line = tournament.tournament_id, tournament.name, tournament.venue
             self.lines.append(self.line)
@@ -104,8 +104,7 @@ class RoundView(main_view.MainMenuView):
         self.display_text_surrounded(round_name)
 
         for match in match_instances:
-            self.line = match.match_name, \
-                        str(match.player_1) + " Vs " + str(match.player_2)
+            self.line = match.match_name, str(match.player_1) + " Vs " + str(match.player_2)
             self.lines.append(self.line)
         self.table_view(self.lines, [])
         self.lines.clear()
