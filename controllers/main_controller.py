@@ -73,6 +73,7 @@ class TournamentMenuController(MainMenuController):
         super().__init__()
         self.create_tournament = tournament_controller.CreateTournament()
         self.start_tournament = tournament_controller.StartTournament()
+        self.resume_tournament = tournament_controller.ResumeTournament()
         self.tournament_report = tournament_controller.TournamentReport()
         self.main_menu = MainMenuController()
 
@@ -86,7 +87,7 @@ class TournamentMenuController(MainMenuController):
             case "2":
                 self.start_tournament()
             case "3":
-                self.start_tournament.load_tournament_statement()
+                self.resume_tournament()
             case "4":
                 self.tournament_report()
             case "5":

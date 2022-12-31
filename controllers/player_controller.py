@@ -201,5 +201,5 @@ class PlayersUnserialized(MainPlayerController):
             self.main_menu_controller.go_to_player_menu_controller()
         elif not len(players_unserialized) >= 8:
             print(f'There are {len(players_unserialized)} '
-                  f'player(s) in the database. Please add at least 8 players.')
+                  f'player(s) in the database. Please add at least 8 players to start a tournament.')
         return players_unserialized

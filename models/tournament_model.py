@@ -90,7 +90,4 @@ class Tournament:
     @staticmethod
     def update_players(player_list, tournament_id):
 
-        tournaments_table.update(
-            {"player_ids": player_list},
-            doc_ids=[tournament_id]
-                                )
+        tournaments_table.update({"player_ids": player_list}, doc_ids=[tournament_id])
