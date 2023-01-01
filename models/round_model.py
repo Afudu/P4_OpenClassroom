@@ -74,8 +74,7 @@ class Round:
                             or score_player_1 == 1):
                         raise ValueError
                 except ValueError:
-                    print("Invalid score. Please enter 0 for a lost, "
-                          "0.5 for a tie, or 1 for a win")
+                    print("Invalid score. Please enter 0 for a lost, 0.5 for a tie, or 1 for a win")
                 else:
                     valid_score_player_1 = True
                     match.score_player_1 = float(score_player_1)
@@ -102,15 +101,17 @@ class Round:
                     match.player_2.tournament_score += float(score_player_2)
 
                     # update score
-                    players_table.update(
-                        {"tournament_score": match.player_2.tournament_score},
-                        doc_ids=[int(match.player_2.player_id)])
+                    players_table.update({"tournament_score": match.player_2.tournament_score},
+                                         doc_ids=[int(match.player_2.player_id)]
+                                         )
 
             match_played = ([match.player_1.player_id, match.score_player_1],
-                            [match.player_2.player_id, match.score_player_2])
+                            [match.player_2.player_id, match.score_player_2]
+                            )
             self.list_of_played_matches.append(match_played)
 
         return Round(self.name,
                      self.start_time,
                      self.end_time,
-                     self.list_of_played_matches)
+                     self.list_of_played_matches
+                     )
