@@ -152,6 +152,7 @@ class CreateTournament(MainTournamentController):
                 case 'y':
                     print('Players in the tournament: ' + str(self.player_ids))
                     player_being_added = int(len(self.player_ids)) + 1
+                    print()
                     print('Adding Player ' + str(player_being_added) + ' of 8')
 
                     entry = input("Enter the id of the player to add: ")
@@ -229,7 +230,7 @@ class StartTournament(MainTournamentController):
         # tournament_object
         self.tournament_object = self.check_players(self.prompt_for_tournament_not_started())
 
-        # start rounds
+        # prompt to start rounds
         while True:
             entry = input("\nWould you like to start the rounds now ? (Y or N): ").lower()
             match entry:
@@ -242,14 +243,11 @@ class StartTournament(MainTournamentController):
 
     def generate_rounds(self, tournament_object):
         self.tournament_object = tournament_object
-        # add view
         self.sorted_players = []
 
         # run round1
         self.sorted_players = self.sort_players_first_round(self.tournament_object)
-        self.tournament_object.round_ids.append(
-            self.round_model.run(self.tournament_object,
-                                 self.sorted_players))
+        self.tournament_object.round_ids.append(self.round_model.run(self.tournament_object, self.sorted_players))
         self.save_tournament_statement(self.tournament_object)
         self.prompt_to_postpone_tournament()
 
@@ -257,9 +255,7 @@ class StartTournament(MainTournamentController):
         for i in range(2, int(self.tournament_object.number_of_rounds) + 1):
             self.sorted_players.clear()
             self.sorted_players = self.sort_players_other_rounds(self.tournament_object)
-            self.tournament_object.round_ids.append(
-                self.round_model.run(self.tournament_object,
-                                     self.sorted_players))
+            self.tournament_object.round_ids.append(self.round_model.run(self.tournament_object, self.sorted_players))
             self.save_tournament_statement(self.tournament_object)
 
             # last round excluded from prompt to postpone
