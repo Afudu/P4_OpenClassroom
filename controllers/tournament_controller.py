@@ -46,14 +46,12 @@ class CreateTournament(MainTournamentController):
         self.tournament_values.append(self.prompt_for_time_control())
         self.tournament_values.append(self.prompt_for_description())
         if self.validate_tournament() == 'save_tournament':
-            tournament_id = self.tournament_model.add_to_database(
-                self.tournament_values)
+            tournament_id = self.tournament_model.add_to_database(self.tournament_values)
             print('Saving the tournament data...')
             time.sleep(2)
-            self.tournament_object = self.tournaments_table.get(
-                doc_id=int(tournament_id))
-            unserialized = self.tournament_model.unserialized(self.tournament_object)
-            self.prompt_for_players(unserialized)
+            self.tournament_object = self.tournaments_table.get(doc_id=int(tournament_id))
+            unserialized_tournament = self.tournament_model.unserialized(self.tournament_object)
+            self.prompt_for_players(unserialized_tournament)
 
         self.tournament_values.clear()
         self.main_menu_controller.go_to_tournament_menu_controller()
@@ -141,13 +139,11 @@ class CreateTournament(MainTournamentController):
         self.display_player.add_player_to_tournament_table(
             players_unserialized)
 
-        choice = input("Would you like to add the player(s) now? "
-                       "(Y or N): ").lower()
+        choice = input("Would you like to add the player(s) now? (Y or N): ").lower()
 
         while len(self.player_ids) < 8:
             if len(self.player_ids) > 0:
-                choice = input("\nWould you like to continue adding a player? "
-                               "(Y or N): ").lower()
+                choice = input("\nWould you like to continue adding a player? (Y or N): ").lower()
             match choice:
                 case 'y':
                     print('Players in the tournament: ' + str(self.player_ids))
@@ -160,16 +156,14 @@ class CreateTournament(MainTournamentController):
                         print("Please enter a valid player id.")
                         continue
                     if int(entry) in self.player_ids:
-                        print("This player has already been added. "
-                              "Please add another.")
+                        print("This player has already been added. Please add another.")
                         continue
 
                     player_to_add = [player
                                      for player in players_unserialized
                                      if player.player_id == int(entry)]
                     if not player_to_add:
-                        print("Your choice is not in the list. "
-                              "Please enter an id in the list.")
+                        print("Your choice is not in the list. Please enter an id in the list.")
                         continue
                     self.player_ids.append(int(entry))
                     self.tournament_model.update_players(self.player_ids,
@@ -228,7 +222,7 @@ class StartTournament(MainTournamentController):
         self.clear()
 
         # tournament_object
-        self.tournament_object = self.check_players(self.prompt_for_tournament_not_started())
+        self.tournament_object = self.check_players(self.prompt_for_tournaments_not_started())
 
         # prompt to start rounds
         while True:
@@ -251,7 +245,7 @@ class StartTournament(MainTournamentController):
         self.save_tournament_statement(self.tournament_object)
         self.prompt_to_postpone_tournament()
 
-        # all the others rounds
+        # running all the others rounds
         for i in range(2, int(self.tournament_object.number_of_rounds) + 1):
             self.sorted_players.clear()
             self.sorted_players = self.sort_players_other_rounds(self.tournament_object)
@@ -275,7 +269,7 @@ class StartTournament(MainTournamentController):
         self.tournaments_table.update({"round_ids": self.ROUNDS_PLAYED},
                                       doc_ids=[self.tournament_object.tournament_id])
 
-    def prompt_for_tournament_not_started(self):
+    def prompt_for_tournaments_not_started(self):
 
         self.start_tournament_view()
 
@@ -432,7 +426,7 @@ class ResumeTournament(MainTournamentController):
         self.clear()
 
         # tournament_object
-        self.tournament_object = self.prompt_for_tournament_in_progress()
+        self.tournament_object = self.prompt_for_tournaments_in_progress()
 
         # prompt to start
         while True:
@@ -480,7 +474,7 @@ class ResumeTournament(MainTournamentController):
             if len(self.tournament_object.round_ids) < int(self.tournament_object.number_of_rounds):
                 self.start_tournament.prompt_to_postpone_tournament()
 
-        # get instances of all rounds in tournament
+        # when all rounds played, get instances of all rounds in tournament
         round_instances.clear()
         for round_id in self.ROUNDS_PLAYED:
             round_serialized = self.rounds_table.get(doc_id=round_id)
@@ -491,7 +485,7 @@ class ResumeTournament(MainTournamentController):
         self.end_tournament_view(round_instances)
         self.main_menu_controller.go_to_tournament_menu_controller()
 
-    def prompt_for_tournament_in_progress(self):
+    def prompt_for_tournaments_in_progress(self):
         self.resume_tournament_view()
         in_progress = [tournament for tournament in self.tournaments_table
                        if 0 < len(tournament['round_ids']) < 4]
