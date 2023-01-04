@@ -29,9 +29,9 @@ class AddPlayer(MainPlayerController):
     def __call__(self):
         self.player_values.append(self.prompt_for_first_name())
         self.player_values.append(self.prompt_for_last_name())
-        self.player_values.append(self.prompt_for_birthdate())
         self.player_values.append(self.prompt_for_gender())
-        self.player_values.append(self.prompt_for_ranking())
+        self.player_values.append(self.prompt_for_birthdate())
+        self.player_values.append(self.prompt_for_rating())
         if self.validate_player() == 'save_player':
             self.player_model.add_to_database(self.player_values)
             print('Saving...')
@@ -61,42 +61,39 @@ class AddPlayer(MainPlayerController):
     @staticmethod
     def prompt_for_birthdate():
         while True:
-            birthdate = input("Enter the player's birthdate "
-                              "in the form of DD/MM/YYYY: ")
+            birthdate = input("Enter the player's birthdate in the form of DD/MM/YYYY: ")
             try:
                 datetime.strptime(birthdate, '%d/%m/%Y')
                 return birthdate
             except ValueError:
-                print("Please enter a valid birthdate "
-                      "in the form of DD/MM/YYYY")
+                print("Please enter a valid birthdate in the form of DD/MM/YYYY")
 
     @staticmethod
     def prompt_for_gender():
         while True:
-            gender = input("Enter the player's gender (W or M): ").lower()
+            gender = input("Enter the player's gender (F or M): ").lower()
             match gender:
-                case 'w':
-                    return 'W'
+                case 'f':
+                    return 'F'
                 case 'm':
                     return 'M'
                 case _:
-                    print("Please enter a valid gender (W or M)")
+                    print("Please enter a valid gender (F or M)")
 
     @staticmethod
-    def prompt_for_ranking():
+    def prompt_for_rating():
         while True:
-            ranking = input("Enter the player's ranking: ")
-            if not ranking.isnumeric():
-                print("Please enter a positive whole number")
+            rating = input("Enter the player's rating: ")
+            if not (rating.isnumeric() > 0 and int(rating) < 1001):
+                print("Please enter a positive whole number between 1 and 1000")
                 continue
-            return ranking
+            return rating
 
     def validate_player(self):
         self.add_player_view.validate_player_view()
         self.table_view([self.player_headers, self.player_values], [])
         while True:
-            entry = input("Would you like to save "
-                          "this player? (Y or N): ").lower()
+            entry = input("Would you like to save this player? (Y or N): ").lower()
             match entry:
                 case 'y':
                     return 'save_player'
@@ -132,19 +129,17 @@ class UpdatePlayerRating(MainPlayerController):
             player_to_update = [player for player in players_unserialized
                                 if player.player_id == int(player_id)]
             if not player_to_update:
-                print("The id you entered is not in the list. "
-                      "Please enter a player id in the list.")
+                print("The id you entered is not in the list. Please enter a player id in the list.")
                 continue
 
             new_rating = input("Enter the new rating: ")
-            if not new_rating.isdigit() > 0:
-                print("Please enter a positive number.")
+            if not (new_rating.isnumeric() > 0 and int(new_rating) < 1001):
+                print("Please enter a positive whole number between 0 and 1000.")
                 continue
             self.update_player_rating_view.player_to_update_title_view()
             self.display_player.reduced_table(player_to_update)
             print('The new rating:', new_rating)
-            self.players_table.update({"rating": new_rating},
-                                      doc_ids=[int(player_id)])
+            self.players_table.update({"rating": new_rating}, doc_ids=[int(player_id)])
             time.sleep(2.5)
             self.main_menu_controller.go_to_player_menu_controller()
 
