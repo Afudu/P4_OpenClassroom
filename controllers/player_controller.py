@@ -98,7 +98,7 @@ class AddPlayer(MainPlayerController):
                 case 'y':
                     return 'save_player'
                 case 'n':
-                    return
+                    self.main_menu_controller.go_to_player_menu_controller()
                 case _:
                     print("Please enter Y (for Yes) or N (for No)")
 
