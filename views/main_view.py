@@ -24,10 +24,7 @@ class TableView:
     def __call__(self, list_to_display, headers):
         self.list_to_display = list_to_display
         self.headers = headers
-        print(tabulate(self.list_to_display,
-                       self.headers,
-                       tablefmt="simple_grid")
-              )
+        print(tabulate(self.list_to_display, self.headers, tablefmt="simple_grid"))
 
 
 class MainMenuView:
@@ -36,7 +33,8 @@ class MainMenuView:
     def __init__(self):
         self.welcome_message = "Welcome to"
         self.app_name = "Tournament Manager"
-        self.menu_titles = ["Main Menu", "Player Menu",
+        self.menu_titles = ["Main Menu",
+                            "Player Menu",
                             "Tournament Menu"
                             ]
         self.menu_options = ["Add Player",
