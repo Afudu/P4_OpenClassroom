@@ -12,7 +12,7 @@ class MakeMenu:
                           ]
 
         self.player_menu = [('1', 'Add Player'),
-                            ('2', 'Update Player Ranking'),
+                            ('2', 'Update Player Rating'),
                             ('3', 'Player Report'),
                             ('4', 'Back to Main Menu')
                             ]
