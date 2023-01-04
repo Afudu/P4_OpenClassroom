@@ -313,8 +313,7 @@ class StartTournament(MainTournamentController):
 
         players = self.tournament_object.player_ids
         if not players:
-            print("\nThere are no players in this tournament."
-                  "\nPlease add 8 players to start the tournament.")
+            print("\nThere are no players in this tournament.\nPlease add 8 players to start the tournament.")
             time.sleep(2.5)
             self.create_tournament.prompt_for_players(self.tournament_object)
         elif not len(players) == 8:
