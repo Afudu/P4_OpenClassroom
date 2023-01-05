@@ -135,7 +135,6 @@ class CreateTournament(MainTournamentController):
         self.tournament_object = tournament_object
         self.player_ids = self.tournament_object.player_ids
         self.players_unserialized = player_controller.PlayersUnserialized()()
-        # players_unserialized = self.players_unserialized()
         self.add_tournament_view.add_player_view()
         self.display_player.add_player_to_tournament_table(self.players_unserialized)
 
@@ -172,8 +171,7 @@ class CreateTournament(MainTournamentController):
                     print("Please enter Y (for Yes) or N (for No)")
 
         while True:
-            entry = input("\nWould you like to start the rounds now ? "
-                          "(Y or N): ").lower()
+            entry = input("\nWould you like to start the rounds now ? (Y or N): ").lower()
             match entry:
                 case 'y':
                     StartTournament().generate_rounds(tournament_object)
@@ -268,14 +266,12 @@ class StartTournament(MainTournamentController):
 
         self.start_tournament_view()
 
-        not_started = [tournament
-                       for tournament in self.tournaments_table if tournament['round_ids'] == []]
+        not_started = [tournament for tournament in self.tournaments_table if tournament['round_ids'] == []]
         if not not_started:
             print('\nThere are no tournaments awaiting to be started. Please add a tournament.')
             time.sleep(2)
             self.go_to_tournament_menu_controller()
-        unserialized_not_started = [self.tournament_model.unserialized(tournament)
-                                    for tournament in not_started]
+        unserialized_not_started = [self.tournament_model.unserialized(tournament) for tournament in not_started]
         self.display_tournament.default(unserialized_not_started)
 
         while True:
@@ -316,8 +312,7 @@ class StartTournament(MainTournamentController):
             self.create_tournament.prompt_for_players(self.tournament_object)
         elif not len(players) == 8:
             print(f"{len(players)} player(s) in this tournament.\n"
-                  f"Please add {int(8 - len(players))} "
-                  f"more player(s) to start the tournament.")
+                  f"Please add {int(8 - len(players))} more player(s) to start the tournament.")
             time.sleep(2.5)
             self.create_tournament.prompt_for_players(self.tournament_object)
         elif len(players) == 8:
@@ -484,14 +479,12 @@ class ResumeTournament(MainTournamentController):
 
     def prompt_for_tournaments_in_progress(self):
         self.resume_tournament_view()
-        in_progress = [tournament for tournament in self.tournaments_table
-                       if 0 < len(tournament['round_ids']) < 4]
+        in_progress = [tournament for tournament in self.tournaments_table if 0 < len(tournament['round_ids']) < 4]
         if not in_progress:
             print('\nThere are no tournaments in progress.')
             time.sleep(2)
             self.go_to_tournament_menu_controller()
-        unserialized_in_progress = [self.tournament_model.unserialized(tournament)
-                                    for tournament in in_progress]
+        unserialized_in_progress = [self.tournament_model.unserialized(tournament) for tournament in in_progress]
         self.display_tournament.in_progress(unserialized_in_progress)
 
         while True:
