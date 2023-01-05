@@ -34,7 +34,7 @@ a document oriented database, to store the data.
 2. Add eight players.
 3. The application generates the pairings automatically using the Swiss tournament system.
 4. Start the tournament and run the rounds.
-5. Input match scores: the winner receives 1 point, the loser 0 points, and 0.5 each for a tie.
+5. Input match scores: the winner receives 1 point, the loser 0, and 0.5 each for a tie.
 
 
 # PEP 8 adherence
