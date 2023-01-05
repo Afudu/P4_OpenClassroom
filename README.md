@@ -8,10 +8,10 @@
 
 # Abstract
 This project consists of creating a standalone tournament management application for a local chess club, 
-Castle Chess, that allows to run the entire tournament events offline, using the Swiss tournament system 
-for match pairings, and produce reports.
+Castle Chess, that allows the tournament managers to run the entire tournament events offline, 
+using the Swiss tournament system for match pairings.
 
-It allows tournament managers to:
+The following features are included in the application:
 
     - Add and save players. 
     
@@ -25,10 +25,12 @@ It allows tournament managers to:
     
     - Display player and tournament reports.
 
+# Application Structure
 The application follows the Model-View-Controller (MVC) design pattern and uses TinyDb, 
 a document oriented database, to store the data.
 
-# Usage
+
+# Basic flow
 1. Create a new tournament.
 2. Add eight players.
 3. The application generates the pairings automatically.
