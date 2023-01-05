@@ -76,10 +76,10 @@ class Round:
                     print("Invalid score. Please enter 0 for a lost, 0.5 for a tie, or 1 for a win")
                 else:
                     valid_score_player_1 = True
-                    match.score_player_1 = float(score_player_1)
-                    match.player_1.tournament_score += float(score_player_1)
+                    match.score_player_1 = score_player_1
+                    match.player_1.tournament_score += score_player_1
 
-                    # update score
+                    # update player_1 score in the database
                     players_table.update(
                         {"tournament_score": match.player_1.tournament_score},
                         doc_ids=[int(match.player_1.player_id)])
@@ -94,10 +94,10 @@ class Round:
                     print("Invalid score. Please enter 0 for a lost, 0.5 for a tie, or 1 for a win")
                 else:
                     valid_score_player_2 = True
-                    match.score_player_2 = float(score_player_2)
-                    match.player_2.tournament_score += float(score_player_2)
+                    match.score_player_2 = score_player_2
+                    match.player_2.tournament_score += score_player_2
 
-                    # update score
+                    # update player_2 score in the database
                     players_table.update({"tournament_score": match.player_2.tournament_score},
                                          doc_ids=[int(match.player_2.player_id)]
                                          )
