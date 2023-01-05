@@ -140,6 +140,7 @@ class UpdatePlayerRating(MainPlayerController):
             if not (new_rating.isnumeric() > 0 and int(new_rating) < 1001):
                 print("Please enter a positive whole number between 1 and 1000.")
                 continue
+
             self.update_player_rating_view.player_to_update_title_view()
             self.display_player.reduced_table(player_to_update)
             print('The new rating:', new_rating)
