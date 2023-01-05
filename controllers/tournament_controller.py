@@ -424,7 +424,7 @@ class ResumeTournament(MainTournamentController):
 
         # prompt to start
         while True:
-            entry = input("\nWould you like to start the remaining rounds now ? (Y or N):").lower()
+            entry = input("\nWould you like to start the remaining round(s) now ? (Y or N):").lower()
             match entry:
                 case 'y':
                     self.generate_remaining_rounds(self.tournament_object)
@@ -482,7 +482,8 @@ class ResumeTournament(MainTournamentController):
 
     def prompt_for_tournaments_in_progress(self):
         self.resume_tournament_view()
-        in_progress = [tournament for tournament in self.tournaments_table if 0 < len(tournament['round_ids']) < 4]
+        in_progress = [tournament for tournament in self.tournaments_table
+                       if 0 < len(tournament['round_ids']) < tournament['number_of_rounds']]
         if not in_progress:
             print('\nThere are no tournaments in progress.')
             time.sleep(2)
