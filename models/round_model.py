@@ -70,8 +70,7 @@ class Round:
             while not valid_score_player_1:
                 try:
                     score_player_1 = float(input(f"Enter the score of {match.player_1}:"))
-                    if not (score_player_1 == 0 or score_player_1 == 0.5
-                            or score_player_1 == 1):
+                    if not (score_player_1 == 0 or score_player_1 == 0.5 or score_player_1 == 1):
                         raise ValueError
                 except ValueError:
                     print("Invalid score. Please enter 0 for a lost, 0.5 for a tie, or 1 for a win")
@@ -89,12 +88,10 @@ class Round:
             while not valid_score_player_2:
                 try:
                     score_player_2 = float(input(f"Enter the score of {match.player_2} :"))
-                    if not (score_player_2 == 0 or score_player_2 == 0.5
-                            or score_player_2 == 1):
+                    if not (score_player_2 == 0 or score_player_2 == 0.5 or score_player_2 == 1):
                         raise ValueError
                 except ValueError:
-                    print("Invalid score. Please enter 0 for a lost, "
-                          "0.5 for a tie, or 1 for a win")
+                    print("Invalid score. Please enter 0 for a lost, 0.5 for a tie, or 1 for a win")
                 else:
                     valid_score_player_2 = True
                     match.score_player_2 = float(score_player_2)
