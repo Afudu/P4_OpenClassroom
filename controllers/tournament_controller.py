@@ -24,8 +24,8 @@ class MainTournamentController:
 
     @staticmethod
     def go_to_tournament_menu_controller():
-        player_menu_controller = main_controller.PlayerMenuController()
-        return player_menu_controller()
+        tournament_menu_controller = main_controller.TournamentMenuController()
+        return tournament_menu_controller()
 
 
 class CreateTournament(MainTournamentController):
@@ -134,10 +134,10 @@ class CreateTournament(MainTournamentController):
     def prompt_for_players(self, tournament_object):
         self.tournament_object = tournament_object
         self.player_ids = self.tournament_object.player_ids
-        self.players_unserialized = player_controller.PlayersUnserialized()
-        players_unserialized = self.players_unserialized()
+        self.players_unserialized = player_controller.PlayersUnserialized()()
+        # players_unserialized = self.players_unserialized()
         self.add_tournament_view.add_player_view()
-        self.display_player.add_player_to_tournament_table(players_unserialized)
+        self.display_player.add_player_to_tournament_table(self.players_unserialized)
 
         choice = input("Would you like to add the player(s) now? (Y or N): ").lower()
 
@@ -159,7 +159,7 @@ class CreateTournament(MainTournamentController):
                         print("This player has already been added. Please add another.")
                         continue
 
-                    player_to_add = [player for player in players_unserialized if player.player_id == int(entry)]
+                    player_to_add = [player for player in self.players_unserialized if player.player_id == int(entry)]
                     if not player_to_add:
                         print("Your choice is not in the list. Please enter an id in the list.")
                         continue
