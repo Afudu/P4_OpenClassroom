@@ -12,7 +12,7 @@ class MainPlayerController:
         self.database = player_model.Database()
         self.players_table = self.database.players_table
         self.player_model = player_model.Player()
-        self.clear = player_view.main_view.ClearScreen()
+        self.clear = main_view.ClearScreen()
 
     @staticmethod
     def go_to_player_menu_controller():
@@ -177,7 +177,7 @@ class PlayerReport(MainPlayerController):
                 case "2":
                     self.clear()
                     self.player_report_view()
-                    self.player_report_view.display_title_rating()
+                    self.player_report_view.display_title_by_rating()
                     players_unserialized.sort(key=attrgetter('rating'), reverse=True)
                     self.display_player.full_table(players_unserialized)
                 case "3":
@@ -192,11 +192,11 @@ class PlayersUnserialized(MainPlayerController):
         players_unserialized = [self.player_model.unserialized(player) for player in self.players_table]
 
         if not players_unserialized:
-            print('There are no players in the database. Please add at least 8 players.')
+            print('There are no players in the database. Please add an even number of players.')
             time.sleep(2.5)
             self.go_to_player_menu_controller()
 
-        elif not len(players_unserialized) >= 8:
+        elif not (len(players_unserialized) > 0 and len(players_unserialized) % 2 == 0):
             print(f'There are {len(players_unserialized)} '
-                  f'player(s) in the database. Please add at least 8 players to start a tournament.')
+                  f'player(s) in the database. Please add an even number of players to start a tournament.')
         return players_unserialized
