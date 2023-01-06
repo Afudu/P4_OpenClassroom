@@ -263,7 +263,7 @@ class StartTournament(MainTournamentController):
         not_started = [tournament for tournament in self.tournaments_table if tournament['round_ids'] == []]
         if not not_started:
             print('\nThere are no tournaments awaiting to be started. Please add a tournament.')
-            time.sleep(2)
+            time.sleep(2.5)
             self.go_to_tournament_menu_controller()
         unserialized_not_started = [self.tournament_model.unserialized(tournament) for tournament in not_started]
         self.display_tournament.default(unserialized_not_started)
@@ -489,7 +489,7 @@ class ResumeTournament(MainTournamentController):
                        if 0 < len(tournament['round_ids']) < tournament['number_of_rounds']]
         if not in_progress:
             print('\nThere are no tournaments in progress.')
-            time.sleep(2)
+            time.sleep(2.5)
             self.go_to_tournament_menu_controller()
         unserialized_in_progress = [self.tournament_model.unserialized(tournament) for tournament in in_progress]
         self.display_tournament.in_progress(unserialized_in_progress)
