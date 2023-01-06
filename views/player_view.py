@@ -1,7 +1,7 @@
-from views import main_view
+from views.main_view import MainMenuView, TableView
 
 
-class PlayerMenuView(main_view.MainMenuView):
+class PlayerMenuView(MainMenuView):
     """Creates the player main menu header"""
     def __call__(self):
         self.display_filled_line()
@@ -11,7 +11,7 @@ class PlayerMenuView(main_view.MainMenuView):
         self.display_filled_line()
 
 
-class AddPlayerView(main_view.MainMenuView):
+class AddPlayerView(MainMenuView):
     """Creates the Add Player menu header"""
     def __call__(self):
         self.display_filled_line()
@@ -25,7 +25,7 @@ class AddPlayerView(main_view.MainMenuView):
         self.display_text_surrounded(self.player_references[0])
 
 
-class UpdateRatingView(main_view.MainMenuView):
+class UpdateRatingView(MainMenuView):
     """Creates the Update Player Rating menu header"""
 
     def __call__(self):
@@ -40,12 +40,12 @@ class UpdateRatingView(main_view.MainMenuView):
         self.display_text_surrounded(self.player_references[2])
 
 
-class DisplayPlayer(main_view.MainMenuView):
+class DisplayPlayer(MainMenuView):
     """Displays the players in the database"""
 
     def __init__(self):
         super().__init__()
-        self.table_view = main_view.TableView()
+        self.table_view = TableView()
         self.line = None
         self.lines = []
 
@@ -71,7 +71,7 @@ class DisplayPlayer(main_view.MainMenuView):
         self.lines.clear()
 
 
-class PlayerReportView(main_view.MainMenuView):
+class PlayerReportView(MainMenuView):
     """Creates the Update Player Report menu header"""
     def __call__(self):
         self.display_filled_line()
@@ -82,5 +82,5 @@ class PlayerReportView(main_view.MainMenuView):
     def display_title_alphabetically(self):
         self.display_text_surrounded(self.player_references[3])
 
-    def display_title_rating(self):
+    def display_title_by_rating(self):
         self.display_text_surrounded(self.player_references[4])
