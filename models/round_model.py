@@ -89,13 +89,13 @@ class Round:
             while not valid_score_player_2:
                 try:
                     score_player_2 = float(input(f"Enter the score of {match.player_2} :"))
-                    if match.score_player_1 == 0 and not score_player_2 == 1:
+                    if match.score_player_1 == 0 and score_player_2 != 1:
                         raise MatchWonError
 
-                    elif match.score_player_1 == 0.5 and not score_player_2 == 0.5:
+                    elif match.score_player_1 == 0.5 and score_player_2 != 0.5:
                         raise MatchTieError
 
-                    elif match.score_player_1 == 1 and not score_player_2 == 0:
+                    elif match.score_player_1 == 1 and score_player_2 != 0:
                         raise MatchLostError
                 except MatchWonError:
                     print(f"Invalid score. {match.player_2} has won the match and should have the score 1.")
