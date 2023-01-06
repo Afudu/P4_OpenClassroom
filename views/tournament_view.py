@@ -1,9 +1,9 @@
-from views import main_view
-import time
+from views.main_view import MainMenuView, TableView
 from controllers import player_controller
+import time
 
 
-class TournamentMenuView(main_view.MainMenuView):
+class TournamentMenuView(MainMenuView):
     """Creates the Tournament main menu view"""
 
     def __init__(self):
@@ -17,12 +17,12 @@ class TournamentMenuView(main_view.MainMenuView):
         self.display_filled_line()
 
 
-class DisplayTournament(main_view.MainMenuView):
+class DisplayTournament(MainMenuView):
     """Display all the tournaments in the database"""
 
     def __init__(self):
         super().__init__()
-        self.table_view = main_view.TableView()
+        self.table_view = TableView()
         self.line = None
         self.lines = []
 
@@ -41,7 +41,7 @@ class DisplayTournament(main_view.MainMenuView):
         self.lines.clear()
 
 
-class AddTournamentView(main_view.MainMenuView):
+class AddTournamentView(MainMenuView):
     """Creates the Add Tournament menu headers"""
 
     def __init__(self):
@@ -63,7 +63,7 @@ class AddTournamentView(main_view.MainMenuView):
         self.display_text_surrounded(self.tournament_references[0])
 
 
-class StartTournamentView(main_view.MainMenuView):
+class StartTournamentView(MainMenuView):
     """Creates the Start Tournament menu headers"""
 
     def __init__(self):
@@ -77,7 +77,7 @@ class StartTournamentView(main_view.MainMenuView):
         self.display_text_surrounded(self.tournament_references[1])
 
 
-class ResumeTournamentView(main_view.MainMenuView):
+class ResumeTournamentView(MainMenuView):
     """View handling resuming a tournament in progress"""
 
     def __call__(self):
@@ -88,14 +88,14 @@ class ResumeTournamentView(main_view.MainMenuView):
         self.display_text_surrounded(self.tournament_references[2])
 
 
-class RoundView(main_view.MainMenuView):
+class RoundView(MainMenuView):
     """Displays the Tournament rounds and matches"""
 
     def __init__(self):
         super().__init__()
         self.end_time = None
         self.start_time = None
-        self.table_view = main_view.TableView()
+        self.table_view = TableView()
         self.line = None
         self.lines = []
 
@@ -134,7 +134,7 @@ class RoundView(main_view.MainMenuView):
             print()
 
 
-class TournamentResultsView(main_view.MainMenuView):
+class TournamentResultsView(MainMenuView):
     """Displays the final score at the end of the tournament"""
     def __call__(self, round_objects=None):
 
@@ -169,7 +169,7 @@ class TournamentResultsView(main_view.MainMenuView):
         print()
 
 
-class TournamentReportView(main_view.MainMenuView):
+class TournamentReportView(MainMenuView):
     """Display all the Tournament report headers """
 
     def __call__(self):
