@@ -23,7 +23,7 @@ In meeting the client's requirements, the application allows the following actio
     
     - Perform player pairings using the Swiss tournament system.
     
-    - Display reports on players, and all tournament's rounds and matches played
+    - Display reports on players, and all tournament's rounds and matches played.
 
 # Code Structure and Database
 The application is entirely in Python and follows the Model-View-Controller (MVC) design pattern.
