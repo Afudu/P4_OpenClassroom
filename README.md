@@ -11,7 +11,7 @@ In this project, as a junior freelance developer presented with the first opport
 the task consists of creating a standalone tournament management application for a local chess club, Castle Chess, 
 that allows the tournament managers to run the entire events offline.
 
-Therefore, in meeting the client's requirements, the application allows the following actions offline:
+In meeting the client's requirements, the application allows the following actions:
 
     - Add players. 
     
