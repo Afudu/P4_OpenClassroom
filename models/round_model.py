@@ -99,9 +99,9 @@ class Round:
                         raise MatchLostError
 
                 except MatchWonError:
-                    print(f"Invalid score. {match.player_2} has won the match and should have the score 1.")
+                    print(f"Invalid score. {match.player_2} has won the match and should have the score 1")
                 except MatchLostError:
-                    print(f"Invalid score. {match.player_2} has lost the match and should have the score 0.")
+                    print(f"Invalid score. {match.player_2} has lost the match and should have the score 0")
                 except MatchTiedError:
                     print(f"Invalid score. The match is a tie, {match.player_2} should have the score 0.5")
                 else:
