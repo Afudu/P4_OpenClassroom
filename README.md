@@ -30,7 +30,7 @@ The application follows the Model-View-Controller (MVC) design pattern.
 
 # Database
 For storing and loading the data, the application uses TinyDb, a document oriented database.
-The database is json format and saved in the 'dbase' folder in the root of the repository.
+The database is json format and will be saved automatically in the 'dbase' folder in the root of the repository.
 
 # Basic flow
 1. Create a new tournament.
