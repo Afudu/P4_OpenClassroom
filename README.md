@@ -25,7 +25,7 @@ In meeting the client's requirements, the application allows the following actio
     
     - Display reports on players, and all tournament's rounds and matches played.
 
-# Code Structure
+# Structure
 The application follows the Model-View-Controller (MVC) design pattern.
 
 # Database
