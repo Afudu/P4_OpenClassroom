@@ -70,7 +70,7 @@ class Round:
             valid_score_player_1 = False
             while not valid_score_player_1:
                 try:
-                    score_player_1 = float(input(f"Enter the score of {match.player_1}:"))
+                    score_player_1 = float(input(f"Enter the score of {match.player_1}: "))
                     if not (score_player_1 == 0 or score_player_1 == 0.5 or score_player_1 == 1):
                         raise ValueError
                 except ValueError:
@@ -88,7 +88,7 @@ class Round:
             valid_score_player_2 = False
             while not valid_score_player_2:
                 try:
-                    score_player_2 = float(input(f"Enter the score of {match.player_2} :"))
+                    score_player_2 = float(input(f"Enter the score of {match.player_2}: "))
                     if match.score_player_1 == 0 and score_player_2 != 1:
                         raise MatchWonError
 
