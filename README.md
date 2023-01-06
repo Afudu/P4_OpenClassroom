@@ -19,17 +19,19 @@ Therefore, in meeting the client's requirements, the application allows the foll
     
     - Create, start and resume tournaments.
     
-    - Save and reload tournament statements at any time.
+    - Save and load tournament statements at any time.
     
     - Perform player pairings using the Swiss tournament system.
     
     - Display reports on players, and all tournament's rounds and matches played.
 
-# Code Structure and Database
-The application is entirely in Python and follows the Model-View-Controller (MVC) design pattern.
-For storing and reloading the data, it uses TinyDb, a document oriented database.
+# Code Structure
+The application follows the Model-View-Controller (MVC) design pattern.
 
-# Basic flow
+# Database
+For storing and loading the data, the application uses TinyDb, a document oriented database.
+
+# Basic tournament flow
 1. Create a new tournament.
 2. Add eight players.
 3. The application generates the pairings automatically.
