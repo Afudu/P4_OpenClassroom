@@ -31,7 +31,7 @@ The application follows the Model-View-Controller (MVC) design pattern.
 # Database
 For storing and loading the data, the application uses TinyDb, a document oriented database.
 
-# Basic tournament flow
+# Basic flow
 1. Create a new tournament.
 2. Add eight players.
 3. The application generates the pairings automatically.
