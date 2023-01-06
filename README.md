@@ -11,7 +11,7 @@ In this project, as a junior freelance developer presented with the first opport
 the task consists of creating a standalone tournament management application for a local chess club, Castle Chess, 
 that allows the tournament managers to run the entire events offline.
 
-In meeting the client's requirements, the application would therefore need to perform the following actions offline:
+In meeting the client's requirements, the application allows the following actions offline:
 
     - Add players. 
     
@@ -23,7 +23,7 @@ In meeting the client's requirements, the application would therefore need to pe
     
     - Perform player pairings using the Swiss tournament system.
     
-    - Display reports on players, all rounds and matches played in a tournament.
+    - Display reports on players, and all tournament's rounds and matches played
 
 # Code Structure and Database
 The application is entirely in Python and follows the Model-View-Controller (MVC) design pattern.
