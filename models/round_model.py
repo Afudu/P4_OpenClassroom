@@ -97,6 +97,7 @@ class Round:
 
                     elif match.score_player_1 == 1 and score_player_2 != 0:
                         raise MatchLostError
+                    
                 except MatchWonError:
                     print(f"Invalid score. {match.player_2} has won the match and should have the score 1.")
                 except MatchLostError:
