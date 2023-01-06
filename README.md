@@ -7,31 +7,32 @@
 **Date:** 11/06/2022
 
 # Abstract
-This project consists of creating a standalone tournament management application for a local chess club, 
-Castle Chess, that allows the tournament managers to run the entire events offline.
+In this project, as a junior freelance developer presented with the first opportunity of a potential client project,
+the task consists of creating a standalone tournament management application for a local chess club, Castle Chess, 
+that allows the tournament managers to run the entire events offline.
 
-The following features are included in the application:
+In meeting the client's requirements, the application would therefore need to perform the following actions offline:
 
-    - Add and save players. 
+    - Add players. 
     
     - Update player ratings.
     
-    - Create and save tournaments.
+    - Create, start and resume tournaments.
     
-    - Start, postpone and resume tournament rounds.
+    - Save and reload tournament statements at any time.
     
-    - Input match scores.
+    - Perform player pairings using the Swiss tournament system.
     
-    - Display player and tournament reports.
+    - Display reports on players, all rounds and matches played in a tournament.
 
-# Structure
-The application follows the Model-View-Controller (MVC) design pattern and uses TinyDb, 
-a document oriented database, to store the data.
+# Code Structure and Database
+The application is entirely in Python and follows the Model-View-Controller (MVC) design pattern.
+For storing and reloading the data, it uses TinyDb, a document oriented database.
 
 # Basic flow
 1. Create a new tournament.
 2. Add eight players.
-3. The application generates the pairings automatically using the Swiss tournament system.
+3. The application generates the pairings automatically.
 4. Start the tournament and run the rounds.
 5. Input match scores: the winner receives 1 point, the loser 0, and 0.5 each for a tie.
 
