@@ -19,8 +19,8 @@ class MainTournamentController:
         self.player_model = player_controller.player_model.Player()
         self.tournament_model = tournament_model.Tournament()
         self.round_model = round_model.Round()
-        self.clear = tournament_view.main_view.ClearScreen()
-        self.table_view = tournament_view.main_view.TableView()
+        self.clear = main_view.ClearScreen()
+        self.table_view = main_view.TableView()
 
     @staticmethod
     def go_to_tournament_menu_controller():
@@ -139,9 +139,8 @@ class CreateTournament(MainTournamentController):
         self.add_tournament_view.add_player_view()
         self.display_player.add_player_to_tournament_table(players_unserialized)
 
-        choice = input("Would you like to add the player(s) now? (Y or N): ").lower()
-
-        while len(self.player_ids) < 8:
+        while True:
+            choice = input("Would you like to add the player(s) now? (Y or N): ").lower()
             if len(self.player_ids) > 0:
                 choice = input("\nWould you like to continue adding a player? (Y or N): ").lower()
             match choice:
@@ -149,7 +148,7 @@ class CreateTournament(MainTournamentController):
                     print('Players in the tournament: ' + str(self.player_ids))
                     player_being_added = int(len(self.player_ids)) + 1
                     print()
-                    print('Adding Player ' + str(player_being_added) + ' of 8')
+                    print('Adding Player ' + str(player_being_added))
 
                     entry = input("Enter the id of the player to add: ")
                     if not entry.isdigit():
@@ -167,16 +166,6 @@ class CreateTournament(MainTournamentController):
                     self.tournament_model.update_players(self.player_ids, tournament_object.tournament_id)
                 case 'n':
                     self.tournament_model.update_players(self.player_ids, tournament_object.tournament_id)
-                    self.go_to_tournament_menu_controller()
-                case _:
-                    print("Please enter Y (for Yes) or N (for No)")
-
-        while True:
-            entry = input("\nWould you like to start the rounds now ? (Y or N): ").lower()
-            match entry:
-                case 'y':
-                    StartTournament().generate_rounds(tournament_object)
-                case 'n':
                     self.go_to_tournament_menu_controller()
                 case _:
                     print("Please enter Y (for Yes) or N (for No)")
@@ -309,18 +298,30 @@ class StartTournament(MainTournamentController):
         self.create_tournament = CreateTournament()
 
         players = self.tournament_object.player_ids
+
         if not players:
-            print("\nThere are no players in this tournament.\nPlease add 8 players to start the tournament.")
+            print("\nThere are no players in this tournament.\nPlease add an even number of"
+                  " players to start the tournament.")
             time.sleep(2.5)
             self.create_tournament.prompt_for_players(self.tournament_object)
-        elif not len(players) == 8:
+
+        elif not (len(players) > 0 and len(players) % 2 == 0):
             print(f"{len(players)} player(s) in this tournament.\n"
-                  f"Please add {int(8 - len(players))} more player(s) to start the tournament.")
+                  f"Please add an even number of players to start the tournament.")
             time.sleep(2.5)
             self.create_tournament.prompt_for_players(self.tournament_object)
-        elif len(players) == 8:
-            print(f"\nThere are {len(players)} player(s) in this tournament.")
-        return self.tournament_object
+
+        print(f"\nThere are {len(players)} player(s) in this tournament.")
+
+        while True:
+            entry = input("\nWould you like to add more players ? (Y or N): ").lower()
+            match entry:
+                case 'y':
+                    self.create_tournament.prompt_for_players(self.tournament_object)
+                case 'n':
+                    return self.tournament_object
+                case _:
+                    print("Please enter Y (for Yes) or N (for No)")
 
     def sort_players_first_round(self, tournament_object):
         """ return a list of players sorted by ranking"""
@@ -577,7 +578,7 @@ class TournamentReport(MainTournamentController):
                     tournament_players.sort(key=attrgetter('first_name'))
                     self.display_player.full_table(tournament_players)
                 case "2":
-                    self.player_report_view.display_title_rating()
+                    self.player_report_view.display_title_by_rating()
                     tournament_players.sort(key=attrgetter('rating'), reverse=True)
                     self.display_player.full_table(tournament_players)
                 case "3":
