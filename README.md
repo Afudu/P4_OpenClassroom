@@ -18,7 +18,7 @@ The following features are included in the application:
     
     - Create and save tournaments.
     
-    - Start, postpone and resume tournament rounds.
+    - Start, postpone and resume tournament rounds at any time.
     
     - Input match scores.
     
