@@ -1,7 +1,8 @@
 from dbase.database import Database
 from models import match_model
-from views import tournament_view
+from views.tournament_view import RoundView
 from controllers import main_controller
+from controllers.exceptions_controller import MatchLostError, MatchWonError, MatchTieError
 
 db = Database()
 rounds_table = db.rounds_table
@@ -24,7 +25,7 @@ class Round:
         self.list_of_played_matches = list_of_played_matches
         self.match_instances = []
         self.match_instance = None
-        self.round_view = tournament_view.RoundView()
+        self.round_view = RoundView()
         self.main_menu_controller = main_controller.MainMenuController()
 
     def serialized(self):
@@ -88,10 +89,20 @@ class Round:
             while not valid_score_player_2:
                 try:
                     score_player_2 = float(input(f"Enter the score of {match.player_2} :"))
-                    if not (score_player_2 == 0 or score_player_2 == 0.5 or score_player_2 == 1):
-                        raise ValueError
-                except ValueError:
-                    print("Invalid score. Please enter 0 for a lost, 0.5 for a tie, or 1 for a win")
+                    if match.score_player_1 == 0 and not score_player_2 == 1:
+                        raise MatchWonError
+
+                    elif match.score_player_1 == 0.5 and not score_player_2 == 0.5:
+                        raise MatchTieError
+
+                    elif match.score_player_1 == 1 and not score_player_2 == 0:
+                        raise MatchLostError
+                except MatchWonError:
+                    print(f"Invalid score. {match.player_2} has won the match and should have the score 1.")
+                except MatchLostError:
+                    print(f"Invalid score. {match.player_2} has lost the match and should have the score 0.")
+                except MatchTieError:
+                    print(f"Invalid score. The match is a tie, {match.player_2} should have the score 0.5")
                 else:
                     valid_score_player_2 = True
                     match.score_player_2 = score_player_2
