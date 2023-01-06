@@ -1,4 +1,4 @@
-from views import main_view
+from views.main_view import TableView
 
 
 class MakeMenu:
@@ -50,8 +50,8 @@ class MakeMenu:
                                               ]
 
     def __call__(self, menu_to_show):
-        """Display a menu and ask the user to choose"""
-        self.table_view = main_view.TableView()
+        """Display a menu and ask the user to choose and option"""
+        self.table_view = TableView()
         self.menu_to_show = menu_to_show
         self.menu_headers = ['Option', 'Go To']
         self.table_view(self.menu_to_show, self.menu_headers)
