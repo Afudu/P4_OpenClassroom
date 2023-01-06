@@ -8,6 +8,6 @@ class MatchWonError(Exception):
     pass
 
 
-class MatchTieError(Exception):
+class MatchTiedError(Exception):
     """Exception raised when the match is a tie and the score input is not 0.5"""
     pass

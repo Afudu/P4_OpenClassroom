@@ -2,7 +2,7 @@ from dbase.database import Database
 from models import match_model
 from views.tournament_view import RoundView
 from controllers import main_controller
-from controllers.exceptions_controller import MatchLostError, MatchWonError, MatchTieError
+from controllers.exceptions_controller import MatchLostError, MatchWonError, MatchTiedError
 
 db = Database()
 rounds_table = db.rounds_table
@@ -93,16 +93,16 @@ class Round:
                         raise MatchWonError
 
                     elif match.score_player_1 == 0.5 and score_player_2 != 0.5:
-                        raise MatchTieError
+                        raise MatchTiedError
 
                     elif match.score_player_1 == 1 and score_player_2 != 0:
                         raise MatchLostError
-                    
+
                 except MatchWonError:
                     print(f"Invalid score. {match.player_2} has won the match and should have the score 1.")
                 except MatchLostError:
                     print(f"Invalid score. {match.player_2} has lost the match and should have the score 0.")
-                except MatchTieError:
+                except MatchTiedError:
                     print(f"Invalid score. The match is a tie, {match.player_2} should have the score 0.5")
                 else:
                     valid_score_player_2 = True
