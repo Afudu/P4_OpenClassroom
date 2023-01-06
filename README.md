@@ -29,7 +29,8 @@ In meeting the client's requirements, the application include the following feat
 The application follows the Model-View-Controller (MVC) design pattern.
 
 # Database
-For storing and loading the data, the application uses TinyDb, a document oriented database, in json format saved in the 'dbase' folder in the root of the repository.
+For storing and loading the data, the application uses TinyDb, a document oriented database, json format. 
+The database is saved in the 'dbase' folder in the root of the repository.
 
 # Basic flow
 1. Create a new tournament.
