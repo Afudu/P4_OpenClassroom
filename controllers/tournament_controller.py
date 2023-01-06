@@ -139,8 +139,10 @@ class CreateTournament(MainTournamentController):
         self.add_tournament_view.add_player_view()
         self.display_player.add_player_to_tournament_table(players_unserialized)
 
+        choice = input("Please add an even number of players in the tournament.\n"
+                       "\nWould you like to add the player(s) now? (Y or N): ").lower()
+
         while True:
-            choice = input("Would you like to add the player(s) now? (Y or N): ").lower()
             if len(self.player_ids) > 0:
                 choice = input("\nWould you like to continue adding a player? (Y or N): ").lower()
             match choice:
@@ -306,7 +308,7 @@ class StartTournament(MainTournamentController):
             self.create_tournament.prompt_for_players(self.tournament_object)
 
         elif not (len(players) > 0 and len(players) % 2 == 0):
-            print(f"{len(players)} player(s) in this tournament.\n"
+            print(f"\n{len(players)} player(s) in this tournament.\n"
                   f"Please add an even number of players to start the tournament.")
             time.sleep(2.5)
             self.create_tournament.prompt_for_players(self.tournament_object)
