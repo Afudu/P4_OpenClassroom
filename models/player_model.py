@@ -45,14 +45,14 @@ class Player:
         tournament_score = self.serialized_player['tournament_score']
         player_id = self.serialized_player['player_id']
         return Player(
-            first_name,
-            last_name,
-            date_of_birth,
-            gender,
-            rating,
-            tournament_score,
-            player_id
-        )
+                      first_name,
+                      last_name,
+                      date_of_birth,
+                      gender,
+                      rating,
+                      tournament_score,
+                      player_id
+                     )
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
