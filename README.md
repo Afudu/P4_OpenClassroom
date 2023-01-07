@@ -29,14 +29,15 @@ In meeting the client's requirements, the application include the following feat
 The application follows the Model-View-Controller (MVC) design pattern.
 
 # Database
-For storing and loading the data, the application uses TinyDb, a document oriented database.
-The database is json format and will be saved automatically in the 'dbase' folder in the root of the repository.
+For storing and loading the data, the application uses TinyDb, a Python based document oriented database.
+The database, in json format, will be created and saved automatically in the 'dbase' folder in the root of the 
+repository, upon lunching the application the first time.
 
 # Basic flow
 1. Create a new tournament.
-2. Add eight players.
-3. The application generates the pairings automatically.
-4. Start the tournament and run the rounds.
+2. Add eight players in the tournament.
+3. Start the tournament created and run the rounds.
+4. The application generates the pairings automatically.
 5. Input match scores: the winner receives 1 point, the loser 0, and 0.5 each for a tie.
 
 # Requirement
