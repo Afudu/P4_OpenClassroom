@@ -1,3 +1,4 @@
+import time
 from dbase.database import Database
 
 db = Database()
@@ -88,3 +89,4 @@ class Tournament:
     def update_players(player_list, tournament_id):
 
         tournaments_table.update({"player_ids": player_list}, doc_ids=[tournament_id])
+        time.sleep(1)
