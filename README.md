@@ -29,7 +29,7 @@ In meeting the client's requirements, the application include the following feat
 The application follows the Model-View-Controller (MVC) design pattern.
 
 # Database
-For storing and loading the data, the application uses TinyDb, a Python based document oriented database.
+For storing and loading the data, the application uses TinyDb, a Python based document oriented database. 
 The database, in json format, will be created and saved automatically in the 'dbase' folder in the root of the 
 repository, upon lunching the application the first time.
 
