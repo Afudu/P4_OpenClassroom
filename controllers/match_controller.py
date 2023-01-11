@@ -2,7 +2,7 @@ class MatchScoreController:
     """Controller handling the validation of match scores"""
 
     @staticmethod
-    def prompt_for_player_score(player):
+    def prompt_for_score(player):
         score_player = float(input(f"Enter the score of {player}:"))
         return score_player
 
