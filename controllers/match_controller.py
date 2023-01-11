@@ -1,11 +1,6 @@
 class ValidateMatchScore:
     """Controller handling the validation of match scores"""
 
-    def __init__(self):
-        self.player = None
-        self.score_player = None
-        self.score_opponent = None
-
     @staticmethod
     def prompt_for_score(player):
         score_player = float(input(f"Enter the score of {player}:"))
