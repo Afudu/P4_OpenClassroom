@@ -537,7 +537,7 @@ class TournamentReport(MainTournamentController):
         self.display_tournament.default(unserialized_tournament)
 
         while True:
-            entry = input("Enter the Id of the tournament to display the report: ")
+            entry = input("Enter the Id of the tournament to display the report for: ")
             if not entry.isdigit():
                 print("Please enter a valid tournament id.")
                 continue
