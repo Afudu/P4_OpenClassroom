@@ -2,7 +2,7 @@ from dbase.database import Database
 from models import match_model
 from views.tournament_view import RoundView
 from controllers import main_controller
-from controllers.exceptions_controller import MatchLostError, MatchWonError, MatchTiedError
+from controllers.match_controller import MatchScoreController, MatchScoreError
 
 db = Database()
 rounds_table = db.rounds_table
@@ -27,6 +27,7 @@ class Round:
         self.match_instance = None
         self.round_view = RoundView()
         self.main_menu_controller = main_controller.MainMenuController()
+        self.match_controller = MatchScoreController()
 
     def serialized(self):
         round_data = {'name': self.name,
@@ -70,46 +71,32 @@ class Round:
             valid_score_player_1 = False
             while not valid_score_player_1:
                 try:
-                    score_player_1 = float(input(f"Enter the score of {match.player_1}: "))
-                    if not (score_player_1 == 0 or score_player_1 == 0.5 or score_player_1 == 1):
-                        raise ValueError
-                except ValueError:
-                    print("Invalid score. Please enter 0 for a lost, 0.5 for a tie, or 1 for a win")
+                    score_player_1 = self.match_controller.prompt_for_player_score(match.player_1)
+                    self.match_controller.validate_player_score(score_player_1)
+                except MatchScoreError:
+                    print(MatchScoreError().messages[0])
                 else:
                     valid_score_player_1 = True
                     match.score_player_1 = score_player_1
                     match.player_1.tournament_score += score_player_1
 
-                    # update player_1 score in the database
-                    players_table.update(
-                        {"tournament_score": match.player_1.tournament_score},
-                        doc_ids=[int(match.player_1.player_id)])
+                    players_table.update({"tournament_score": match.player_1.tournament_score},
+                                         doc_ids=[int(match.player_1.player_id)]
+                                         )
 
             valid_score_player_2 = False
             while not valid_score_player_2:
                 try:
-                    score_player_2 = float(input(f"Enter the score of {match.player_2}: "))
-                    if match.score_player_1 == 0 and score_player_2 != 1:
-                        raise MatchWonError
+                    score_player_2 = self.match_controller.prompt_for_player_score(match.player_2)
+                    self. match_controller.validate_opponent_score(match.score_player_1, score_player_2)
 
-                    elif match.score_player_1 == 0.5 and score_player_2 != 0.5:
-                        raise MatchTiedError
-
-                    elif match.score_player_1 == 1 and score_player_2 != 0:
-                        raise MatchLostError
-
-                except MatchWonError:
-                    print(f"Invalid score. {match.player_2} has won the match and should have the score 1")
-                except MatchLostError:
-                    print(f"Invalid score. {match.player_2} has lost the match and should have the score 0")
-                except MatchTiedError:
-                    print(f"Invalid score. The match is a tie, {match.player_2} should have the score 0.5")
+                except MatchScoreError:
+                    print(MatchScoreError().messages[1])
                 else:
                     valid_score_player_2 = True
                     match.score_player_2 = score_player_2
                     match.player_2.tournament_score += score_player_2
 
-                    # update player_2 score in the database
                     players_table.update({"tournament_score": match.player_2.tournament_score},
                                          doc_ids=[int(match.player_2.player_id)]
                                          )
