@@ -1,5 +1,10 @@
-class MatchScoreController:
+class ValidateMatchScore:
     """Controller handling the validation of match scores"""
+
+    def __init__(self):
+        self.player = None
+        self.score_player = None
+        self.score_opponent = None
 
     @staticmethod
     def prompt_for_score(player):
@@ -7,8 +12,8 @@ class MatchScoreController:
         return score_player
 
     @staticmethod
-    def validate_player_score(score):
-        if not (score == 0 or score == 0.5 or score == 1):
+    def validate_player_score(score_player):
+        if not (score_player == 0 or score_player == 0.5 or score_player == 1):
             raise MatchScoreError
 
     @staticmethod
