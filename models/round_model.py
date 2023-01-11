@@ -88,7 +88,7 @@ class Round:
             while not valid_score_player_2:
                 try:
                     score_player_2 = self.match_controller.prompt_for_score(match.player_2)
-                    self. match_controller.validate_opponent_score(match.score_player_1, score_player_2)
+                    self.match_controller.validate_opponent_score(match.score_player_1, score_player_2)
 
                 except MatchScoreError:
                     print(MatchScoreError().messages[1])
