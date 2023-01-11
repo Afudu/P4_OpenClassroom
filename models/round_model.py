@@ -2,7 +2,7 @@ from dbase.database import Database
 from models import match_model
 from views.tournament_view import RoundView
 from controllers import main_controller
-from controllers.match_controller import MatchScoreController, MatchScoreError
+from controllers.match_controller import ValidateMatchScore, MatchScoreError
 
 db = Database()
 rounds_table = db.rounds_table
@@ -27,7 +27,7 @@ class Round:
         self.match_instance = None
         self.round_view = RoundView()
         self.main_menu_controller = main_controller.MainMenuController()
-        self.match_controller = MatchScoreController()
+        self.match_controller = ValidateMatchScore()
 
     def serialized(self):
         round_data = {'name': self.name,
