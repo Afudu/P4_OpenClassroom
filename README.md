@@ -38,11 +38,12 @@ repository, upon lunching the application the first time.
 
 # Basic flow
 
-1. Create a new tournament.
-2. Add eight players in the tournament.
-3. Start the tournament created and run the rounds.
-4. The application generates the pairings automatically.
-5. Input match scores: the winner receives 1 point, the loser 0, and 0.5 each for a tie.
+1. Create players.
+2. Create a new tournament.
+3. Add eight players in the tournament.
+4. Start the tournament created and run the rounds.
+5. The application generates the pairings automatically.
+6. Input match scores: the winner receives 1 point, the loser 0, and 0.5 each for a tie.
 
 # Requirement
 
