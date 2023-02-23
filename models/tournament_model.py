@@ -8,7 +8,8 @@ tournaments_table = db.tournaments_table
 class Tournament:
     """Creates an instance of a tournament"""
 
-    def __init__(self, name=None,
+    def __init__(self,
+                 name=None,
                  venue=None,
                  start_date=None,
                  number_of_rounds=4,
