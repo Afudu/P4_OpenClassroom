@@ -523,7 +523,7 @@ class TournamentReport(MainTournamentController):
     def __call__(self):
         self.clear()
         self.tournament_report_view()
-        self.prompt_for_report_menu(self.prompt_for_tournament())
+        self.prompt_for_tournament_report_menu(self.prompt_for_tournament())
 
     def prompt_for_tournament(self):
         tournaments = [tournament for tournament in self.tournaments_table]
@@ -548,24 +548,24 @@ class TournamentReport(MainTournamentController):
             unserialized_selected = self.tournament_model.unserialized(selected_tournament)
             return unserialized_selected
 
-    def prompt_for_report_menu(self, tournament_object):
+    def prompt_for_tournament_report_menu(self, tournament_object):
         while True:
             entry = self.make_menu(self.make_menu.tournaments_report_menu)
             match entry:
                 case "1":
-                    self.tournament_players(tournament_object)
+                    self.get_tournament_players(tournament_object)
                 case "2":
                     self.tournament_rounds(tournament_object)
                 case "3":
                     self.go_to_tournament_menu_controller()
 
-    def tournament_players(self, tournament_object):
+    def get_tournament_players(self, tournament_object):
         tournament_players = []
 
         if not tournament_object.player_ids:
             print('\nThere are no players in this tournament.')
             time.sleep(2)
-            self.prompt_for_report_menu(tournament_object)
+            self.prompt_for_tournament_report_menu(tournament_object)
 
         for player_id in tournament_object.player_ids:
             player_serialized = self.players_table.get(doc_id=player_id)
@@ -584,7 +584,7 @@ class TournamentReport(MainTournamentController):
                     tournament_players.sort(key=attrgetter('rating'), reverse=True)
                     self.display_player.full_table(tournament_players)
                 case "3":
-                    self.prompt_for_report_menu(tournament_object)
+                    self.prompt_for_tournament_report_menu(tournament_object)
 
     def tournament_rounds(self, tournament_object):
         tournament_rounds = []
@@ -592,7 +592,7 @@ class TournamentReport(MainTournamentController):
         if not tournament_object.round_ids:
             print('\nThere are no rounds played in this tournament.')
             time.sleep(2)
-            self.prompt_for_report_menu(tournament_object)
+            self.prompt_for_tournament_report_menu(tournament_object)
 
         for round_id in tournament_object.round_ids:
             round_serialized = self.rounds_table.get(doc_id=round_id)
@@ -608,4 +608,4 @@ class TournamentReport(MainTournamentController):
                     self.end_tournament_view.round_report_header()
                     self.end_tournament_view(tournament_rounds)
                 case "3":
-                    self.prompt_for_report_menu(tournament_object)
+                    self.prompt_for_tournament_report_menu(tournament_object)
