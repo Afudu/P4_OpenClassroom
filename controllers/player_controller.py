@@ -1,6 +1,7 @@
 from datetime import datetime
 from controllers import main_controller
 from models import player_model
+from models import menu_model
 from views import main_view
 from views import player_view
 import time
@@ -155,6 +156,7 @@ class PlayerReport(MainPlayerController):
     def __init__(self):
         super().__init__()
         self.make_menu = main_controller.menu_controller.MakeMenu()
+        self.menu_list = menu_model.MenuList()
         self.player_report_view = player_view.PlayerReportView()
         self.player_menu_view = player_view.PlayerMenuView()
         self.display_player = player_view.DisplayPlayer()
@@ -166,7 +168,7 @@ class PlayerReport(MainPlayerController):
         players_unserialized = self.players_unserialized()
 
         while True:
-            entry = self.make_menu(self.make_menu.players_report_menu)
+            entry = self.make_menu(self.menu_list.players_report_menu)
             match entry:
                 case "1":
                     self.clear()
