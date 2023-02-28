@@ -3,6 +3,7 @@ from controllers import main_controller
 from controllers import player_controller
 from models import tournament_model
 from models import round_model
+from models import menu_model
 from views import main_view
 from views import tournament_view
 from views import player_view
@@ -39,6 +40,7 @@ class CreateTournament(MainTournamentController):
         self.players_unserialized = []
         self.add_tournament_view = tournament_view.AddTournamentView()
         self.make_menu = main_controller.menu_controller.MakeMenu()
+        self.menu_list = menu_model.MenuList()
         self.display_player = player_view.DisplayPlayer()
         self.headers = main_view.MainMenuView().tournament_headers_by_name
 
@@ -113,7 +115,7 @@ class CreateTournament(MainTournamentController):
 
     def prompt_for_time_control(self):
         print('Please select a time control')
-        entry = self.make_menu(self.make_menu.time_control_menu)
+        entry = self.make_menu(self.menu_list.time_control_menu)
         match entry:
             case "1":
                 return 'Bullet'
@@ -513,6 +515,7 @@ class TournamentReport(MainTournamentController):
     def __init__(self):
         super().__init__()
         self.make_menu = main_controller.menu_controller.MakeMenu()
+        self.menu_list = menu_model.MenuList()
         self.display_tournament = tournament_view.DisplayTournament()
         self.tournament_report_view = tournament_view.TournamentReportView()
         self.display_player = player_view.DisplayPlayer()
@@ -550,7 +553,7 @@ class TournamentReport(MainTournamentController):
 
     def prompt_for_tournament_report_menu(self, tournament_object):
         while True:
-            entry = self.make_menu(self.make_menu.tournaments_report_menu)
+            entry = self.make_menu(self.menu_list.tournaments_report_menu)
             match entry:
                 case "1":
                     self.get_tournament_players(tournament_object)
@@ -573,7 +576,7 @@ class TournamentReport(MainTournamentController):
             tournament_players.append(player_unserialized)
 
         while True:
-            entry = self.make_menu(self.make_menu.tournament_players_report_menu)
+            entry = self.make_menu(self.menu_list.tournament_players_report_menu)
             match entry:
                 case "1":
                     self.player_report_view.display_title_alphabetically()
@@ -600,7 +603,7 @@ class TournamentReport(MainTournamentController):
             tournament_rounds.append(round_unserialized)
 
         while True:
-            entry = self.make_menu(self.make_menu.tournament_rounds_report_menu)
+            entry = self.make_menu(self.menu_list.tournament_rounds_report_menu)
             match entry:
                 case "1":
                     self.round_view.display_rounds(tournament_rounds)
