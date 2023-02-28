@@ -1,4 +1,5 @@
 import sys
+from models import menu_model
 from controllers import menu_controller
 from controllers import player_controller
 from controllers import tournament_controller
@@ -12,6 +13,7 @@ class MainMenuController:
 
     def __init__(self):
         self.make_menu = menu_controller.MakeMenu()
+        self.menu_list = menu_model.MenuList()
         self.clear = main_view.ClearScreen()
         self.main_menu_view = main_view.MainMenuView()
 
@@ -22,7 +24,7 @@ class MainMenuController:
         self.tournament_menu_controller = TournamentMenuController()
         self.quit_app_controller = QuitAppController()
 
-        entry = self.make_menu(self.make_menu.main_menu)
+        entry = self.make_menu(self.menu_list.main_menu)
         match entry:
             case "1":
                 self.player_menu_controller()
@@ -45,7 +47,7 @@ class PlayerMenuController(MainMenuController):
     def __call__(self):
         self.clear()
         self.player_menu_view()
-        entry = self.make_menu(self.make_menu.player_menu)
+        entry = self.make_menu(self.menu_list.player_menu)
         match entry:
             case "1":
                 self.add_player_controller()
@@ -71,7 +73,7 @@ class TournamentMenuController(MainMenuController):
     def __call__(self):
         self.clear()
         self.tournament_menu_view()
-        entry = self.make_menu(self.make_menu.tournament_menu)
+        entry = self.make_menu(self.menu_list.tournament_menu)
         match entry:
             case "1":
                 self.create_tournament_controller()
