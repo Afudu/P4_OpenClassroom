@@ -199,6 +199,6 @@ class PlayersUnserialized(MainPlayerController):
             self.go_to_player_menu_controller()
 
         elif not (len(players_unserialized) > 0 and len(players_unserialized) % 2 == 0):
-            print(f'There are {len(players_unserialized)} '
-                  f'player(s) in the database. Please add an even number of players to start a tournament.')
+            print(f'There are {len(players_unserialized)} player(s) in the database. '
+                  f'Please add an even number of players to start a tournament.')
         return players_unserialized
