@@ -2,8 +2,8 @@ from controllers import main_controller
 
 
 def main():
-    controller = main_controller.MainMenuController()
-    controller()
+    main_menu_controller = main_controller.MainMenuController()
+    main_menu_controller()
 
 
 if __name__ == "__main__":
