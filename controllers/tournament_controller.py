@@ -510,7 +510,7 @@ class ResumeTournament(MainTournamentController):
 
 
 class TournamentReport(MainTournamentController):
-    """Display Players list alphabetically and by rating"""
+    """Display tournament reports:  players, rounds and matches"""
 
     def __init__(self):
         super().__init__()
@@ -530,14 +530,14 @@ class TournamentReport(MainTournamentController):
 
     def prompt_for_tournament(self):
         tournaments = [tournament for tournament in self.tournaments_table]
-        unserialized_tournament = [self.tournament_model.unserialized(tournament)
-                                   for tournament in tournaments]
+        unserialized_tournaments = [self.tournament_model.unserialized(tournament)
+                                    for tournament in tournaments]
 
         if not tournaments:
             print('\nThere are no tournaments created.')
             time.sleep(2)
             self.go_to_tournament_menu_controller()
-        self.display_tournament.default(unserialized_tournament)
+        self.display_tournament.default(unserialized_tournaments)
 
         while True:
             entry = input("Enter the Id of the tournament to display the report for: ")
@@ -563,7 +563,7 @@ class TournamentReport(MainTournamentController):
                     self.go_to_tournament_menu_controller()
 
     def get_tournament_players(self, tournament_object):
-        tournament_players = []
+        unserialized_tournament_players = []
 
         if not tournament_object.player_ids:
             print('\nThere are no players in this tournament.')
@@ -573,24 +573,24 @@ class TournamentReport(MainTournamentController):
         for player_id in tournament_object.player_ids:
             player_serialized = self.players_table.get(doc_id=player_id)
             player_unserialized = self.player_model.unserialized(player_serialized)
-            tournament_players.append(player_unserialized)
+            unserialized_tournament_players.append(player_unserialized)
 
         while True:
             entry = self.make_menu(self.menu_list.tournament_players_report_menu)
             match entry:
                 case "1":
                     self.player_report_view.display_title_alphabetically()
-                    tournament_players.sort(key=attrgetter('first_name'))
-                    self.display_player.full_table(tournament_players)
+                    unserialized_tournament_players.sort(key=attrgetter('first_name'))
+                    self.display_player.full_table(unserialized_tournament_players)
                 case "2":
                     self.player_report_view.display_title_by_rating()
-                    tournament_players.sort(key=attrgetter('rating'), reverse=True)
-                    self.display_player.full_table(tournament_players)
+                    unserialized_tournament_players.sort(key=attrgetter('rating'), reverse=True)
+                    self.display_player.full_table(unserialized_tournament_players)
                 case "3":
                     self.prompt_for_tournament_report_menu(tournament_object)
 
     def tournament_rounds(self, tournament_object):
-        tournament_rounds = []
+        unserialized_tournament_rounds = []
 
         if not tournament_object.round_ids:
             print('\nThere are no rounds played in this tournament.')
@@ -600,15 +600,15 @@ class TournamentReport(MainTournamentController):
         for round_id in tournament_object.round_ids:
             round_serialized = self.rounds_table.get(doc_id=round_id)
             round_unserialized = self.round_model.unserialized(round_serialized)
-            tournament_rounds.append(round_unserialized)
+            unserialized_tournament_rounds.append(round_unserialized)
 
         while True:
             entry = self.make_menu(self.menu_list.tournament_rounds_report_menu)
             match entry:
                 case "1":
-                    self.round_view.display_rounds(tournament_rounds)
+                    self.round_view.display_rounds(unserialized_tournament_rounds)
                 case "2":
                     self.end_tournament_view.round_report_header()
-                    self.end_tournament_view(tournament_rounds)
+                    self.end_tournament_view(unserialized_tournament_rounds)
                 case "3":
                     self.prompt_for_tournament_report_menu(tournament_object)
