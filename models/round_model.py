@@ -34,7 +34,8 @@ class Round:
         round_data = {'name': self.name,
                       'start_time': self.start_time,
                       'end_time': self.end_time,
-                      'list_of_played_matches': self.list_of_played_matches}
+                      'list_of_played_matches': self.list_of_played_matches
+                      }
         return round_data
 
     @staticmethod
