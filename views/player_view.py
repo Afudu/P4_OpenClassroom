@@ -49,22 +49,22 @@ class DisplayPlayer(MainMenuView):
         self.line = None
         self.lines = []
 
-    def full_table(self, player_list):
-        for player in player_list:
+    def full_table(self, unserialized_player_list):
+        for player in unserialized_player_list:
             self.line = player.first_name, player.last_name, player.gender, player.date_of_birth, player.rating
             self.lines.append(self.line)
         self.table_view(self.lines, self.player_headers_by_name)
         self.lines.clear()
 
-    def reduced_table(self, player_list):
-        for player in player_list:
+    def reduced_table(self, unserialized_player_list):
+        for player in unserialized_player_list:
             self.line = player.player_id, player.first_name, player.last_name, player.rating
             self.lines.append(self.line)
         self.table_view(self.lines, self.player_headers_by_id)
         self.lines.clear()
 
-    def add_player_to_tournament_table(self, player_list):
-        for player in player_list:
+    def add_player_to_tournament_table(self, unserialized_player_list):
+        for player in unserialized_player_list:
             self.line = player.player_id, player.first_name, player.last_name, player.date_of_birth
             self.lines.append(self.line)
         self.table_view(self.lines, self.player_headers_by_dob)
