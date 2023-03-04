@@ -11,4 +11,4 @@ class Match:
         self.score_player_2 = score_player_2
 
     def __str__(self):
-        return f"{self.match_name} : {self.player_1} --Vs-- {self.player_2}."
+        return f'{self.match_name} : {self.player_1} --Vs-- {self.player_2}.'
