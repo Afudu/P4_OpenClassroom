@@ -6,7 +6,6 @@ from controllers.match_controller import ValidateMatchScore, MatchScoreError
 
 
 db = Database()
-rounds_table = db.rounds_table
 players_table = db.players_table
 
 
