@@ -49,7 +49,7 @@ class AddPlayer(MainPlayerController):
     def prompt_for_first_name():
         while True:
             first_name = input("Enter the player's the first name: ")
-            if not first_name[0].isalpha():
+            if not (first_name and first_name[0].isalpha()):
                 print("Please enter a valid first name")
                 continue
             return first_name
@@ -58,7 +58,7 @@ class AddPlayer(MainPlayerController):
     def prompt_for_last_name():
         while True:
             last_name = input("Enter the player's last name: ")
-            if not last_name[0].isalpha():
+            if not (last_name and last_name[0].isalpha()):
                 print("Please enter a valid last name")
                 continue
             return last_name
