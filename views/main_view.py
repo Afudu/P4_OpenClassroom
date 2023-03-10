@@ -53,8 +53,8 @@ class MainMenuView:
                                      ]
         self.player_headers_by_name = ['First Name',
                                        'Last Name',
-                                       'Gender',
                                        'Date of Birth',
+                                       'Gender',
                                        'Rating'
                                        ]
         self.player_headers_by_dob = ['Id',
