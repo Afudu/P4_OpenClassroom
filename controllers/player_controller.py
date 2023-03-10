@@ -34,8 +34,8 @@ class AddPlayer(MainPlayerController):
     def __call__(self):
         self.player_values.append(self.prompt_for_first_name())
         self.player_values.append(self.prompt_for_last_name())
-        self.player_values.append(self.prompt_for_gender())
         self.player_values.append(self.prompt_for_birthdate())
+        self.player_values.append(self.prompt_for_gender())
         self.player_values.append(self.prompt_for_rating())
         if self.validate_player() == 'save_player':
             self.player_model.add_to_database(self.player_values)
