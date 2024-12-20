@@ -100,15 +100,16 @@ that allows the tournament managers to run the entire events offline.
 
 
 ### Linting
+The codebase is fully linted and free of errors.
 
-- To run Linting
+- To Run Linting
   ```bash
   flake8
   
 ## Screenshots
 
-![Login Page](screenshots/main_menu.png "Main Menu")
+![Main Menu](screenshots/main_menu.png "Main Menu")
 
-![Feed Page](screenshots/player_menu.png "Player Menu")
+![Player Menu](screenshots/player_menu.png "Player Menu")
 
-![Following Page](screenshots/tournament_menu.png "Tournament Menu")
+![Tournament Menu](screenshots/tournament_menu.png "Tournament Menu")
