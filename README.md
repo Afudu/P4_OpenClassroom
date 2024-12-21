@@ -106,7 +106,7 @@ The codebase is fully linted and free of errors.
   ```bash
   flake8
   
-## Screenshots
+### Screenshots
 
 ![Main Menu](screenshots/main_menu.png "Main Menu")
 
